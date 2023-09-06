@@ -7,6 +7,7 @@ import {
   Routes
 } from 'react-router-dom';
 import Home from './Pages/Home/Home';
+import Resume from './Pages/Resume/Resume';
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
         >
 
         <Routes>
-          <Route exact path='/' element={<Home />}  />
+          {/* <Route exact path='/' element={<Home />}  /> */}
+          {/* <Route exact path="/resume-editor" element={<Resume />} /> */}
+          <Route exact path="/" element={<Resume />} />
         </Routes>
           
         </AppShell>
