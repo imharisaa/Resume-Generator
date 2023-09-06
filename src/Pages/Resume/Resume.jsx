@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Text } from "@mantine/core";
+import { ActionIcon, Box, Button, Paper, Text } from "@mantine/core";
 import React, { useState } from "react";
 import { useResumeStyles } from "./Resume.style";
 import LeftSection from '../Resume/LeftSection/LeftSection'
@@ -26,9 +26,9 @@ const Resume = () => {
               <LeftSection />
              </Box>
           </Paper>
-          <Button className={`${isDrawerOpen ? left_section_buttonOpened : left_section_buttonClosed}`} fullWidth variant="outline" onClick={toggleDrawer}>
-            {isDrawerOpen ? 'Close Drawer' : 'Open Drawer'}
-          </Button>
+          <ActionIcon variant="transparent" className={`${isDrawerOpen ? left_section_buttonOpened : left_section_buttonClosed}`} fullWidth onClick={toggleDrawer}>
+            {isDrawerOpen ? 'X' : ''}
+          </ActionIcon>
         </Box>
         <Box className={right_section}>
           <Paper padding="lg">
