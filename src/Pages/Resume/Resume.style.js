@@ -8,16 +8,16 @@ export const useResumeStyles = createStyles({
   },
 
   left_section: {
-    width: "50px",
+    width: "1px",
     height: "100%",
-    overflowX: "hidden",
     transition: "width 0.5s ease",
     position: 'relative',
-    padding: 12
   },
 
   left_section_open: {
     width: "45vw",
+    overflowX: "hidden",
+    padding: 12
   },
 
   right_section: {
@@ -30,18 +30,23 @@ export const useResumeStyles = createStyles({
 
   left_section_buttonOpened: {
     position: "absolute",
-    width: "50px",
+    width: "10px",
     right: "10px",
-    top: "5px",
-    height: "50px",
+    top: "15px",
+    height: "10px",
+    backgroundColor: 'lightsteelblue',
+    color: "white",
+    fontWeight: 'bolder'
   },
 
   left_section_buttonClosed: {
-    position: "relative",
-    width: "auto",
-    right: "0px",
-    top: "0px",
     height: "100vh",
+    backgroundColor: 'lightsteelblue',
+    boxShadow: '8px 7px 7px 3px lightgrey',
+    border: 'none',
+    ":active": {
+      boxShadow: 'inset -2px 8px 16px 1px lightgrey',
+    }
   }
 
 });
