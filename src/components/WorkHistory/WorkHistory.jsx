@@ -5,18 +5,17 @@ import {
   Container,
   Flex,
   Grid,
-  Group,
   Text,
   TextInput,
-  Title,
+  Title
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactQuill from "react-quill";
 
-import { useSelector, useDispatch } from "react-redux";
+import { IconCubePlus, IconTrash } from "@tabler/icons-react";
+import { useDispatch, useSelector } from "react-redux";
 import { addWorkHistory, deleteWorkHistory, updateWorkHistory } from "../../store/forms.reducer";
-import { IconPlus, IconTrash } from "@tabler/icons-react";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -304,7 +303,7 @@ const WorkHistory = () => {
               }}
             >
               <Flex w={"100%"} p={12}>
-                <IconPlus size={"1.5rem"} />
+                <IconCubePlus size={"1.5rem"} />
                 <Text pl={12} color="cyan">
                   Add Work History
                 </Text>
