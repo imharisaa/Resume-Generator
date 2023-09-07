@@ -56,7 +56,6 @@ const formsSlice = createSlice({
       state.websiteAndSocialLinks[data.payload.key].title = data.payload.title;
     },
     deleteWebSiteAndSocialLinks(state, data) {
-      debugger;
       state.websiteAndSocialLinks.splice(data.payload, 1);
     },
 
@@ -80,12 +79,17 @@ const formsSlice = createSlice({
     //? Skills Reducers
 
     addSkill(state, data) {
-      debugger;
       state.skills.push(data.payload);
     },
     updateSkill(state, data) {
+      if (data.payload.groupId) {
+        state.skills[data.payload.id].groupTitle = data.payload.groupTitle;
+        state.skills[data.payload.id].skills = data.payload.skills;
+      }
+
       state.skills[data.payload.id].skill = data.payload.skill;
       state.skills[data.payload.id].level = data.payload.level;
+      state.skills[data.payload.id].levelColor = data.payload.levelColor;
     },
     deleteSkill(state, data) {
       state.skills.splice(data.payload, 1);
@@ -94,7 +98,7 @@ const formsSlice = createSlice({
     //? Professional Summary Reducers
 
     updateProfessionalSummary(state, data) {
-      state.professionalSummary.details = data.payload
+      state.professionalSummary.details = data.payload;
     },
 
     //? Personal Detail Reducers
@@ -114,6 +118,30 @@ const formsSlice = createSlice({
       state.personal_details.postalCode = data.payload.postalCode;
       state.personal_details.placeOfBirth = data.payload.placeOfBirth;
       state.personal_details.wantedJobTitle = data.payload.wantedJobTitle;
+    },
+
+    //? Grouped Skills Reducers
+
+    addSkillGroup(state, data) {
+      state.skills.push(data.payload);
+    },
+
+    updateSkillGroup(state, data) {
+      state.skills[data.payload.key].skills[data.payload.gkey].skill =
+        data.payload.skill;
+      state.skills[data.payload.key].skills[data.payload.gkey].level =
+        data.payload.level;
+      state.skills[data.payload.key].skills[data.payload.gkey].levelColor =
+        data.payload.levelColor;
+    },
+    deleteSkillGroup(state, data) {
+      state.skills[data.payload.key].skills.splice(data.payload.gkey, 1);
+    },
+
+    //? add skill in group skills
+
+    addGroupSkills(state, data) {
+      state.skills[data.payload.key].skills.push(data.payload.skillData)
     }
 
   },
@@ -133,6 +161,10 @@ export const {
   updateSkill,
   deleteSkill,
   updateProfessionalSummary,
-  updatePersonalDetail
+  updatePersonalDetail,
+  addSkillGroup,
+  updateSkillGroup,
+  deleteSkillGroup,
+  addGroupSkills
 } = formsSlice.actions;
 export default formsSlice.reducer;

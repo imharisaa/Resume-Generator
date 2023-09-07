@@ -1,20 +1,17 @@
-import React, { useRef } from "react";
 import {
+  ActionIcon,
+  Avatar,
+  Box,
   Container,
+  Flex,
   Grid,
   TextInput,
-  FileInput,
-  Box,
-  Flex,
-  Title,
-  Input,
-  ActionIcon,
-  Text,
-  Avatar,
+  Title
 } from "@mantine/core";
-import { usePersonalDetailStyles } from "./PersonalDetail.style";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePersonalDetail } from "../../store/forms.reducer";
+import { usePersonalDetailStyles } from "./PersonalDetail.style";
 
 function PersonalDetail() {
   const {

@@ -13,8 +13,8 @@ import React from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
-import { useSelector, useDispatch } from "react-redux";
-import { IconPlus, IconTrash } from "@tabler/icons-react";
+import { IconCubePlus, IconTrash } from "@tabler/icons-react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addWebSiteAndSocialLinks,
   deleteWebSiteAndSocialLinks,
@@ -138,7 +138,7 @@ const WebsitesSocialLinks = () => {
               }}
             >
               <Flex w={"100%"} p={12}>
-                <IconPlus size={"1.5rem"} />
+                <IconCubePlus size={"1.5rem"} />
                 <Text pl={12} color="cyan">
                   Add Website / Social Links
                 </Text>
