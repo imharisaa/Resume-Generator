@@ -25,7 +25,15 @@ const formsSlice = createSlice({
     employmentHistory: [],
     education: [],
     websiteAndSocialLinks: [],
-    skills: [],
+    skills: [
+      {
+       groupId: 'c3593bc4-0d1f-4bf6-bb74-95214a6d7c89',
+       groupTitle: 'Skill Group Title',
+       skills: [
+
+       ]
+      }
+    ],
   },
   reducers: {
     //? Work History Reducers
@@ -82,7 +90,9 @@ const formsSlice = createSlice({
       state.skills.push(data.payload);
     },
     updateSkill(state, data) {
+      debugger
       if (data.payload.groupId) {
+        debugger
         state.skills[data.payload.id].groupTitle = data.payload.groupTitle;
         state.skills[data.payload.id].skills = data.payload.skills;
       }

@@ -1,13 +1,16 @@
 import { Box, Container, Flex, Grid } from "@mantine/core";
 import React from "react";
+import useRightSectionStyle from "./RightSection.style";
+import FristTemplate from "../../../Resume_Preview/Templates/First.template";
 
 const RightSection = () => {
+  const { classes: {right_section_container} } = useRightSectionStyle()
   return (
     <>
-      <Container p={"xl"} h={"95vh"} w={"100vw"}>
+      <Container className={right_section_container} p={"xl"} h={"95vh"} w={"100vw"}>
         <Grid gutter={"lg"}>
           <Flex justify={'center'} align={'center'} w={'100%'} h={'100%'}>
-            <Box bg={"cyan"} h={"91.5vh"} w={"75%"}></Box>
+            <FristTemplate />
           </Flex>
         </Grid>
       </Container>
