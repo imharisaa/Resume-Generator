@@ -21,6 +21,37 @@ function PersonalDetail() {
     (state) => state.forms.personal_details
   );
   const dispatch = useDispatch();
+  const maxLength = 11
+  function breakStringIntoWords(inputString, maxCharactersPerWord) {
+    const words = inputString.split(' ');
+    const formattedWords = [];
+  
+    for (const word of words) {
+      if (word.length > maxCharactersPerWord) {
+        const brokenWord = [];
+        let currentChunk = '';
+  
+        for (let i = 0; i < word.length; i++) {
+          currentChunk += word[i];
+  
+          if (currentChunk.length === maxCharactersPerWord) {
+            brokenWord.push(currentChunk + '-');
+            currentChunk = '';
+          }
+        }
+  
+        if (currentChunk) {
+          brokenWord.push(currentChunk);
+        }
+  
+        formattedWords.push(brokenWord.join(' '));
+      } else {
+        formattedWords.push(word);
+      }
+    }
+  
+    return formattedWords.join(' ');
+  }
 
   const fieldsData = {
     address: personalDetailData.address,
@@ -70,10 +101,11 @@ function PersonalDetail() {
               size="md"
               pt={12}
               onChange={(e) => {
+                const firstName = breakStringIntoWords(e.target.value, maxLength)
                 dispatch(
                   updatePersonalDetail({
                     ...fieldsData,
-                    firstName: e.target.value,
+                    firstName: firstName,
                   })
                 );
               }}
@@ -197,10 +229,11 @@ function PersonalDetail() {
               size="md"
               pt={12}
               onChange={(e) => {
+                const lastName = breakStringIntoWords(e.target.value, maxLength)
                 dispatch(
                   updatePersonalDetail({
                     ...fieldsData,
-                    lastName: e.target.value,
+                    lastName: lastName,
                   })
                 );
               }}
