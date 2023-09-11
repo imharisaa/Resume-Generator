@@ -90,9 +90,9 @@ const formsSlice = createSlice({
       state.skills.push(data.payload);
     },
     updateSkill(state, data) {
-      debugger
+      
       if (data.payload.groupId) {
-        debugger
+        
         state.skills[data.payload.id].groupTitle = data.payload.groupTitle;
         state.skills[data.payload.id].skills = data.payload.skills;
       }
