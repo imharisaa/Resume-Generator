@@ -2,12 +2,13 @@ import {
   Accordion,
   ActionIcon,
   Box,
+  Checkbox,
   Container,
   Flex,
   Grid,
   Text,
   TextInput,
-  Title
+  Title,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import React from "react";
@@ -15,7 +16,11 @@ import ReactQuill from "react-quill";
 
 import { IconCubePlus, IconTrash } from "@tabler/icons-react";
 import { useDispatch, useSelector } from "react-redux";
-import { addWorkHistory, deleteWorkHistory, updateWorkHistory } from "../../store/forms.reducer";
+import {
+  addWorkHistory,
+  deleteWorkHistory,
+  updateWorkHistory,
+} from "../../store/forms.reducer";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -54,11 +59,11 @@ const WorkHistory = () => {
                         </Text>
                       </Box>
                       <Box w={"5%"}>
-                        <Flex w={'100%'} justify={'flex-end'}>
+                        <Flex w={"100%"} justify={"flex-end"}>
                           <ActionIcon
                             variant="subtle"
                             color="red"
-                            w={'10px'}
+                            w={"10px"}
                             radius={"md"}
                             onClick={() => {
                               dispatch(deleteWorkHistory(key));
@@ -71,7 +76,7 @@ const WorkHistory = () => {
                     </Flex>
                   </Accordion.Control>
                   <Accordion.Panel>
-                    <Container h={"20rem"} pt={12}>
+                    <Container h={"30rem"} pt={12}>
                       <Grid gutter={"lg"}>
                         <Flex w={"100%"} direction={"column"}>
                           <Box w={"100%"}>
@@ -105,7 +110,7 @@ const WorkHistory = () => {
                                 />
                                 <Flex w={"100%"} justify={"space-between"}>
                                   <DateInput
-                                    valueFormat="DD/MMM/YYYY"
+                                    valueFormat="MM/YYYY"
                                     label="Start Date"
                                     size="md"
                                     variant="filled"
@@ -117,15 +122,12 @@ const WorkHistory = () => {
                                         .getDate()
                                         .toString()
                                         .padStart(2, "0");
-                                      const smonth = dateInput.toLocaleString(
-                                        "default",
-                                        {
-                                          month: "short",
-                                        }
-                                      );
+                                      const smonth = (dateInput.getMonth() + 1)
+                                        .toString()
+                                        .padStart(2, "0");
                                       const syear = dateInput.getFullYear();
 
-                                      const startDate = `${sday}/${smonth}/${syear}`;
+                                      const startDate = `${smonth}/${syear}`;
                                       const jobTitle = item.jobTitle;
                                       const employer = item.employer;
                                       const endDate = item.endDate;
@@ -144,28 +146,51 @@ const WorkHistory = () => {
                                       );
                                     }}
                                   />
-                                  <DateInput
-                                    valueFormat="DD/MMM/YYYY"
-                                    label="End Date"
-                                    size="md"
-                                    variant="filled"
-                                    pt={12}
-                                    w={"49%"}
-                                    onChange={(e) => {
-                                      const dateInput = new Date(e);
-                                      const sday = dateInput
-                                        .getDate()
-                                        .toString()
-                                        .padStart(2, "0");
-                                      const smonth = dateInput.toLocaleString(
-                                        "default",
-                                        {
-                                          month: "short",
-                                        }
-                                      );
-                                      const syear = dateInput.getFullYear();
+                                    <DateInput
+                                      valueFormat="MM/YYYY"
+                                      label="End Date"
+                                      size="md"
+                                      variant="filled"
+                                      pt={12}
+                                      w={"49%"}
+                                      onChange={(e) => {
+                                        const dateInput = new Date(e);
+                                        const sday = dateInput
+                                          .getDate()
+                                          .toString()
+                                          .padStart(2, "0");
+                                        const smonth = (
+                                          dateInput.getMonth() + 1
+                                        )
+                                          .toString()
+                                          .padStart(2, "0");
+                                        const syear = dateInput.getFullYear();
 
-                                      const endDate = `${sday}/${smonth}/${syear}`;
+                                        const endDate = `${smonth}/${syear}`;
+                                        const jobTitle = item.jobTitle;
+                                        const employer = item.employer;
+                                        const startDate = item.startDate;
+                                        const city = item.city;
+                                        const details = item.details;
+                                        dispatch(
+                                          updateWorkHistory({
+                                            id: key,
+                                            startDate,
+                                            endDate,
+                                            employer,
+                                            jobTitle,
+                                            city,
+                                            details,
+                                          })
+                                        );
+                                        // setEndDate(e);
+                                        // dateFormater();
+                                      }}
+                                      disabled={item.present}
+                                    />
+                                </Flex>
+                                <Checkbox label="Currently Working" pt={'12px'} onChange={(e) => {
+                                      const endDate = e ? 'Present' : item.endDate;
                                       const jobTitle = item.jobTitle;
                                       const employer = item.employer;
                                       const startDate = item.startDate;
@@ -180,13 +205,10 @@ const WorkHistory = () => {
                                           jobTitle,
                                           city,
                                           details,
+                                          present: true
                                         })
                                       );
-                                      // setEndDate(e);
-                                      // dateFormater();
-                                    }}
-                                  />
-                                </Flex>
+                                    }}/>
                               </Box>
                               <Box w={"49%"}>
                                 <TextInput
@@ -247,7 +269,7 @@ const WorkHistory = () => {
                           <Box w={"100%"}>
                             <ReactQuill
                               style={{
-                                height: "7rem",
+                                height: "15rem",
                                 paddingTop: 24,
                               }}
                               theme="snow"
@@ -298,6 +320,7 @@ const WorkHistory = () => {
                   endDate: "",
                   city: "",
                   details: "",
+                  present: false
                 };
                 dispatch(addWorkHistory(newData));
               }}
