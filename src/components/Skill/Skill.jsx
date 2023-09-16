@@ -152,7 +152,7 @@ const Skill = () => {
                                             radius={false}
                                             size={"sm"}
                                             w={"35%"}
-                                            color={color}
+                                            color={skillVal.levelColor}
                                             marks={[
                                               { value: 20, label: "." },
                                               { value: 40, label: "." },

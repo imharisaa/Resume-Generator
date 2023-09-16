@@ -20,19 +20,17 @@ const formsSlice = createSlice({
       dateOfBirth: "",
     },
     professionalSummary: {
-      details: "",
+      details: `Motivated Sales Associate with 5 years of experience boosting sales and customer loyalty through individualized service. Resourceful expert at learning customer needs, directing to desirable merchandise and upselling to meet sales quotas. Committed to strengthening customer experiences with positivity and professionalism when answering requests and processing sales.`,
     },
     employmentHistory: [],
     education: [],
     websiteAndSocialLinks: [],
     skills: [
       {
-       groupId: 'c3593bc4-0d1f-4bf6-bb74-95214a6d7c89',
-       groupTitle: 'Skill Group Title',
-       skills: [
-
-       ]
-      }
+        groupId: "c3593bc4-0d1f-4bf6-bb74-95214a6d7c89",
+        groupTitle: "Skill Group Title",
+        skills: [],
+      },
     ],
   },
   reducers: {
@@ -49,6 +47,7 @@ const formsSlice = createSlice({
       state.employmentHistory[data.payload.id].employer = data.payload.employer;
       state.employmentHistory[data.payload.id].city = data.payload.city;
       state.employmentHistory[data.payload.id].details = data.payload.details;
+      state.employmentHistory[data.payload.id].present = data.payload.present;
     },
     deleteWorkHistory(state, data) {
       state.employmentHistory.splice(data.payload, 1);
@@ -90,9 +89,7 @@ const formsSlice = createSlice({
       state.skills.push(data.payload);
     },
     updateSkill(state, data) {
-      
       if (data.payload.groupId) {
-        
         state.skills[data.payload.id].groupTitle = data.payload.groupTitle;
         state.skills[data.payload.id].skills = data.payload.skills;
       }
@@ -151,9 +148,8 @@ const formsSlice = createSlice({
     //? add skill in group skills
 
     addGroupSkills(state, data) {
-      state.skills[data.payload.key].skills.push(data.payload.skillData)
-    }
-
+      state.skills[data.payload.key].skills.push(data.payload.skillData);
+    },
   },
 });
 
@@ -175,6 +171,6 @@ export const {
   addSkillGroup,
   updateSkillGroup,
   deleteSkillGroup,
-  addGroupSkills
+  addGroupSkills,
 } = formsSlice.actions;
 export default formsSlice.reducer;

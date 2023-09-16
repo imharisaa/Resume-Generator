@@ -1,9 +1,10 @@
 import { Box, Container, Flex, Grid, MantineProvider, useMantineTheme } from "@mantine/core";
 import React from "react";
 import useRightSectionStyle from "./RightSection.style";
-import FristTemplate from "../../../Resume_Preview/Templates/First.template";
+import FristTemplate from "../../../Resume_Preview/Templates/First.Template/First.template";
 import { useSelector } from "react-redux";
 import { colorPlates } from "../../../Theming/CustomColorPlates/Plates";
+import SecondTemplate from "../../../Resume_Preview/Templates/Second.Template/Second.template";
 
 
 const RightSection = () => {
@@ -20,7 +21,8 @@ const RightSection = () => {
                   custom: colorPlates.blue
                 }
             }}>
-              <FristTemplate />
+              {/* <FristTemplate /> */}
+              <SecondTemplate />
             </MantineProvider>
           </Flex>
         </Grid>
