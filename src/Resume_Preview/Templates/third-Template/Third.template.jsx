@@ -11,7 +11,11 @@ import {
 import { useSelector } from "react-redux";
 
 const ThirdTemplate = () => {
-  const thirdTemplateData = useSelector((state) => state.forms);
+  const {
+    personal_details: { wantedJobTitle, firstName, lastName, email },
+    websiteAndSocialLinks,
+    skills,
+  } = useSelector((state) => state.forms);
   const {
     classes: {
       Third_Template__container,
@@ -26,7 +30,6 @@ const ThirdTemplate = () => {
       Skill_Component__skills_heading,
       Skill_Component__skill_heading,
       Skill_Component__content_container,
-      Work_History_Component__heading_container,
     },
   } = useThirdTemplateStyle();
 
@@ -36,60 +39,14 @@ const ThirdTemplate = () => {
     <Box className={Third_Template__container} h={"297mm"} w={"210mm"}>
       <Box p={"12px"} className={Third_Template__col_2}>
         <Flex direction={"column"}>
-          <Box w={"100%"} p={"24px"}>
-            <div
-              style={{
-                color: "lightslategray",
-              }}
-              dangerouslySetInnerHTML={{
-                __html: `${thirdTemplateData.professionalSummary.details}`,
-              }}
-            />
-          </Box>
-
-          <Box w={"100%"} p={"12px"}>
-            <Box
-              p={"12px"}
-              className={Work_History_Component__heading_container}
-            >
-              <Heading3>Work History</Heading3>
-            </Box>
-            {thirdTemplateData.employmentHistory.map((item, key) => {
-              return (
-                <Box w="100%" pt={"24px"}>
-                  <Flex justify={"space-between"} w={"100%"}>
-                    <Box w={"25%"}>
-                      {/* <Flex align={"center"} w={"100%"} h={"100%"}> */}
-                      <Text weight={"bolder"} color="#737272">
-                        {`${item.startDate} - ${item.endDate}`}
-                      </Text>
-                      {/* </Flex> */}
-                    </Box>
-                    <Box w={"72%"}>
-                      <Heading4>{item.jobTitle}</Heading4>
-                      <Text italic>
-                        {item.employer}
-                        {item.city === "" ? "" : `, ${item.city}`}
-                      </Text>
-                      <Box w={"100%"} pl={24} pt={12}>
-                        <div
-                          style={{
-                            color: "lightslategray",
-                          }}
-                          dangerouslySetInnerHTML={{
-                            __html: `${item.details}`,
-                          }}
-                        />
-                      </Box>
-                    </Box>
-                  </Flex>
-                </Box>
-              );
-            })}
-          </Box>
+          <ProfessionalSummary />
+          <WorkHistory />
+          <Education />
         </Flex>
       </Box>
+
       <Box className={Third_Template__col_1}>
+        {/* Personal details starts */}
         <Box
           w={"15rem"}
           mih={"100px"}
@@ -101,23 +58,22 @@ const ThirdTemplate = () => {
             alignment={"center"}
             color={theme.colors.custom.first.heading1.light}
           >
-            {thirdTemplateData.personal_details.firstName
-              ? thirdTemplateData.personal_details.firstName
-              : "Your Name"}
+            {firstName ? firstName : "Your Name"}
           </Heading1>
+
           <Heading1
             width={"15rem"}
             alignment={"center"}
             color={theme.colors.custom.first.heading1.light}
           >
-            {thirdTemplateData.personal_details.lastName}
+            {lastName}
           </Heading1>
+
           <Text color={"gray"} pt={"3px"} size={"15px"}>
-            {thirdTemplateData.personal_details.wantedJobTitle
-              ? thirdTemplateData.personal_details.wantedJobTitle
-              : "Profession"}
+            {wantedJobTitle ? wantedJobTitle : "Profession"}
           </Text>
         </Box>
+        {/* Personal details ends */}
         <Box
           w={"15rem"}
           mih={"100px"}
@@ -133,17 +89,18 @@ const ThirdTemplate = () => {
               Contact
             </Heading2>
           </Box>
+
           <Box className={Contact_Component__content_email__container}>
             <Heading6 width={"15rem"} alignment={"start"} color={"whitesmoke"}>
               E-mail
             </Heading6>
+
             <Text align={"start"} size={"15px"} color={"whitesmoke"}>
-              {thirdTemplateData.personal_details.email
-                ? thirdTemplateData.personal_details.email
-                : "a@gmail.com"}
+              {email ? email : "a@gmail.com"}
             </Text>
           </Box>
-          {thirdTemplateData.websiteAndSocialLinks.map((item, key) => (
+
+          {websiteAndSocialLinks.map((item, key) => (
             <Box className={Contact_Component__content_social_links__container}>
               <Heading6
                 width={"15rem"}
@@ -152,12 +109,14 @@ const ThirdTemplate = () => {
               >
                 {item.title}
               </Heading6>
+
               <Text align={"start"} size={"15px"} color={"whitesmoke"}>
                 {item.link}
               </Text>
             </Box>
           ))}
         </Box>
+
         <Box w={"15rem"} className={Skill_Component__container}>
           <Box mb={"12px"} className={Skill_Component__skills_heading}>
             <Heading2
@@ -168,7 +127,7 @@ const ThirdTemplate = () => {
               Skills
             </Heading2>
           </Box>
-          {thirdTemplateData.skills.map((item, key) => {
+          {skills.map((item, key) => {
             return (
               <Box
                 w={"15rem"}
@@ -279,3 +238,114 @@ const ThirdTemplate = () => {
 };
 
 export default ThirdTemplate;
+
+function ProfessionalSummary() {
+  const thirdTemplateData = useSelector((state) => state.forms);
+  return (
+    <Box w={"100%"} p={"24px"}>
+      <div
+        style={{
+          color: "lightslategray",
+        }}
+        dangerouslySetInnerHTML={{
+          __html: `${thirdTemplateData.professionalSummary.details}`,
+        }}
+      />
+    </Box>
+  );
+}
+
+function WorkHistory() {
+  const thirdTemplateData = useSelector((state) => state.forms);
+  const {
+    classes: { Work_History_Component__heading_container },
+  } = useThirdTemplateStyle();
+  return (
+    <Box w={"100%"} p={"12px"}>
+      <Box p={"12px"} className={Work_History_Component__heading_container}>
+        <Heading3>Work History</Heading3>
+      </Box>
+      {thirdTemplateData.employmentHistory.map((item, key) => {
+        return (
+          <Box w="100%" pt={"24px"}>
+            <Flex justify={"space-between"} w={"100%"}>
+              <Box w={"25%"}>
+                {/* <Flex align={"center"} w={"100%"} h={"100%"}> */}
+                <Text weight={"bolder"} color="#737272">
+                  {`${item.startDate} - ${item.endDate}`}
+                </Text>
+                {/* </Flex> */}
+              </Box>
+
+              <Box w={"72%"}>
+                <Heading4>{item.jobTitle}</Heading4>
+                <Text italic>
+                  {item.employer}
+                  {item.city === "" ? "" : `, ${item.city}`}
+                </Text>
+                <Box w={"100%"} pl={24} pt={12}>
+                  <div
+                    style={{
+                      color: "lightslategray",
+                    }}
+                    dangerouslySetInnerHTML={{
+                      __html: `${item.details}`,
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Flex>
+          </Box>
+        );
+      })}
+    </Box>
+  );
+}
+
+function Education() {
+  const thirdTemplateData = useSelector((state) => state.forms);
+  console.log(thirdTemplateData.education.detials);
+  const {
+    classes: { Work_History_Component__heading_container },
+  } = useThirdTemplateStyle();
+  return (
+    <Box w={"100%"} p={"12px"}>
+      <Box p={"12px"} className={Work_History_Component__heading_container}>
+        <Heading3>Education</Heading3>
+      </Box>
+      {thirdTemplateData.education.map((item, key) => {
+        return (
+          <Box w="100%" pt={"24px"}>
+            <Flex justify={"space-between"} w={"100%"}>
+              <Box w={"25%"}>
+                {/* <Flex align={"center"} w={"100%"} h={"100%"}> */}
+                <Text weight={"bolder"} color="#737272">
+                  {`${item.startDate} - ${item.endDate}`}
+                </Text>
+                {/* </Flex> */}
+              </Box>
+
+              <Box w={"72%"}>
+                <Heading4>{item.jobTitle}</Heading4>
+                <Text italic>
+                  {item.employer}
+                  {item.city === "" ? "" : `, ${item.city}`}
+                </Text>
+                <Box w={"100%"} pl={24} pt={12}>
+                  <div
+                    style={{
+                      color: "lightslategray",
+                    }}
+                    dangerouslySetInnerHTML={{
+                      __html: `${thirdTemplateData.education.details}`,
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Flex>
+          </Box>
+        );
+      })}
+    </Box>
+  );
+}
