@@ -13,6 +13,7 @@ import Cancel from "./Pages/Cancel/Cancel";
 function App() {
   return (
     <div className="App">
+
       <MantineProvider
         theme={{
           colorScheme: "light",
