@@ -23,7 +23,6 @@ function App() {
         }}
       >
           <Routes>
-            {/* <Route exact path="/payment" element={<StripeContainer />} /> */}
             <Route exact path="/payment" element={<Payment />} />
             <Route exact path="/" element={<Home />} />
             <Route exact path="/resume" element={<Resume />} />
