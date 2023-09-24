@@ -150,7 +150,20 @@ const formsSlice = createSlice({
     addGroupSkills(state, data) {
       state.skills[data.payload.key].skills.push(data.payload.skillData);
     },
+
+    uploadCVData(state, data) {
+      debugger
+      state.education = data.payload.education
+      state.employmentHistory = data.payload.employmentHistory
+      state.personal_details = data.payload.personal_details
+      state.professionalSummary = data.payload.professionalSummary
+      state.skills = data.payload.skills
+      state.websiteAndSocialLinks = data.payload.websiteAndSocialLinks
+    }
   },
+
+
+
 });
 
 export const {
@@ -172,5 +185,6 @@ export const {
   updateSkillGroup,
   deleteSkillGroup,
   addGroupSkills,
+  uploadCVData
 } = formsSlice.actions;
 export default formsSlice.reducer;
