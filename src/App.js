@@ -16,13 +16,11 @@ function App() {
           custom: colorPlates.blue
         }
       }} >
-        <AppShell header={<Toolbar />}>
           <Routes>
             {/* <Route exact path='/' element={<Home />}  /> */}
             {/* <Route exact path="/resume-editor" element={<Resume />} /> */}
             <Route exact path="/" element={<Resume />} />
           </Routes>
-        </AppShell>
       </MantineProvider>
     </div>
   );
