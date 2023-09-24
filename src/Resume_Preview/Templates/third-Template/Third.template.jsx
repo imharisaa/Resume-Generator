@@ -326,9 +326,9 @@ function Education() {
               </Box>
 
               <Box w={"72%"}>
-                <Heading4>{item.jobTitle}</Heading4>
+                <Heading4>{item.school}</Heading4>
                 <Text italic>
-                  {item.employer}
+                  {item.degree}
                   {item.city === "" ? "" : `, ${item.city}`}
                 </Text>
                 <Box w={"100%"} pl={24} pt={12}>
@@ -337,7 +337,7 @@ function Education() {
                       color: "lightslategray",
                     }}
                     dangerouslySetInnerHTML={{
-                      __html: `${thirdTemplateData.education.details}`,
+                      __html: `${item.details}`,
                     }}
                   />
                 </Box>
