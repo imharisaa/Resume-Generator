@@ -33,12 +33,11 @@ const FristTemplate = () => {
   const theme = useMantineTheme();
 
   return (
-    <Box className={First_Template__container} h={"297mm"} w={"210mm"}>
+    <Box className={First_Template__container} bg={'whitesmoke'} h={"297mm"} w={"210mm"}>
       <Box className={First_Template__col_1}>
         <Box
           w={"15rem"}
           mih={"100px"}
-          mah={"fit-content"}
           className={Name_And_Profession__container}
         >
           <Heading1
