@@ -3,6 +3,7 @@ export const colorPlates = {
     first: {
       light: "#597FD4",
       lighter: "#AABEE9",
+      lightGreyishBlue: "#1d1e206b",
       normal: "#294D9E",
       dark: "#224083",
       darker: "#14264D",

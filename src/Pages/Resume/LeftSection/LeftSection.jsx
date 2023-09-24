@@ -12,12 +12,13 @@ const LeftSection = () => {
   return (
     <>
       {/* <Box h={'100vh'}> */}
-        <PersonalDetails />
-        <ProfessionalSummary />
-        <WorkHistory />
-        <WebsitesSocialLinks />
-        <Education />
-        <Skill />
+      <PersonalDetails />
+      <ProfessionalSummary />
+      <WorkHistory />
+      <Education />
+      <WebsitesSocialLinks />
+      <Education />
+      <Skill />
       {/* </Box> */}
     </>
   );

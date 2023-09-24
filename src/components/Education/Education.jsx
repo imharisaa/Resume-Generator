@@ -7,7 +7,7 @@ import {
   Grid,
   Text,
   TextInput,
-  Title
+  Title,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import React from "react";
@@ -24,14 +24,14 @@ import {
 import { v4 as uuidv4 } from "uuid";
 
 const Education = () => {
-  const workHistoryData = useSelector((state) => state.forms.education);
+  const educationData = useSelector((state) => state.forms.education);
   const dispatch = useDispatch();
 
   return (
     <>
       <Container mih={"15rem"} mt={12}>
         <Grid gutter={"lg"}>
-          <Flex w={'100%'} direction={"column"} h={"100%"}>
+          <Flex w={"100%"} direction={"column"} h={"100%"}>
             <Title order={4}>Education History</Title>
             <Text size={".8rem"} color="gray">
               A varied education on your resume sums up the value that you are
@@ -40,7 +40,7 @@ const Education = () => {
 
             {/* <Group> */}
             <Accordion chevron={false} variant="separated" mt={12}>
-              {workHistoryData.map((item, key) => (
+              {educationData.map((item, key) => (
                 <Accordion.Item key={key} value={item.id}>
                   <Accordion.Control>
                     <Flex w={"100%"} justify={"space-between"} align={"center"}>
@@ -308,7 +308,7 @@ const Education = () => {
               <Flex w={"100%"} p={12}>
                 <IconCubePlus size={"1.5rem"} />
                 <Text pl={12} color="cyan">
-                  Add Work History
+                  Add Education
                 </Text>
               </Flex>
             </ActionIcon>
