@@ -42,7 +42,7 @@ const ForthTemplate = () => {
   const theme = useMantineTheme();
 
   return (
-    <Box>
+    <Box bg={"white"}>
       <Box p={15} width={"100%"} bg="#294d9e">
         <Box className={Name_And_Profession__container}>
           <Box>
