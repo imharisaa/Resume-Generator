@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { colorPlates } from "../../../Theming/CustomColorPlates/Plates";
 import SecondTemplate from "../../../Resume_Preview/Templates/Second.Template/Second.template";
 import ThirdTemplate from "../../../Resume_Preview/Templates/third-Template/Third.template";
+import ForthTemplate from "../../../Resume_Preview/Templates/forth-Template/Forth.template";
 
 const RightSection = () => {
   const themeData = useSelector((state) => state.theme.colorPlate);
@@ -39,7 +40,8 @@ const RightSection = () => {
             >
               {/* <FristTemplate /> */}
               {/* <SecondTemplate /> */}
-              <ThirdTemplate />
+              {/* <ThirdTemplate /> */}
+              <ForthTemplate />
             </MantineProvider>
           </Flex>
         </Grid>
