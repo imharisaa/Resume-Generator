@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useResumeStyles } from "./Resume.style";
 import LeftSection from "../Resume/LeftSection/LeftSection";
 import RightSection from "./RightSection/RightSection";
+import { IconArrowBigRightLines } from "@tabler/icons-react";
 
 const Resume = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -14,6 +15,7 @@ const Resume = () => {
       left_section_open,
       left_section_buttonOpened,
       left_section_buttonClosed,
+      openDrawerIcon,
     },
   } = useResumeStyles();
 
@@ -39,12 +41,22 @@ const Resume = () => {
           fullWidth
           onClick={toggleDrawer}
         >
-          {isDrawerOpen ? "X" : ""}
+          {isDrawerOpen ? (
+            "X"
+          ) : (
+            <Box className={openDrawerIcon}>
+              <IconArrowBigRightLines
+                height="100%"
+                width="100%"
+                color="#5455578a"
+              />
+            </Box>
+          )}
         </ActionIcon>
       </Box>
       <Box className={right_section}>
         <Paper padding="lg">
-            <RightSection />
+          <RightSection />
         </Paper>
       </Box>
     </Box>

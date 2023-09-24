@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-export const useResumeStyles = createStyles({
+export const useResumeStyles = createStyles((theme) => ({
   resume_container: {
     display: "flex",
     height: "100vh",
@@ -11,13 +11,13 @@ export const useResumeStyles = createStyles({
     width: "1px",
     height: "100%",
     transition: "width 0.5s ease",
-    position: 'relative',
+    position: "relative",
   },
 
   left_section_open: {
     width: "45vw",
     overflowX: "hidden",
-    padding: 12
+    padding: 12,
   },
 
   right_section: {
@@ -34,19 +34,28 @@ export const useResumeStyles = createStyles({
     right: "10px",
     top: "15px",
     height: "10px",
-    backgroundColor: 'lightsteelblue',
+    backgroundColor: "lightsteelblue",
     color: "white",
-    fontWeight: 'bolder'
+    fontWeight: "bolder",
   },
 
   left_section_buttonClosed: {
     height: "100vh",
-    backgroundColor: 'lightsteelblue',
-    boxShadow: '8px 7px 7px 3px lightgrey',
-    border: 'none',
+    backgroundColor: "lightsteelblue",
+    boxShadow: `3px 0px 10px 0px ${theme.colors.custom.first.lightGreyishBlue}`,
+    border: "none",
+    position: "relative",
     ":active": {
-      boxShadow: 'inset -2px 8px 16px 1px lightgrey',
-    }
-  }
+      boxShadow: "inset -2px 8px 16px 1px lightgrey",
+    },
+  },
 
-});
+  openDrawerIcon: {
+    left: 15,
+    width: 42,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+  },
+}));
