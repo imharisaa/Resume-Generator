@@ -10,7 +10,11 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconFileDownload, IconFileUpload, IconTemplate } from "@tabler/icons-react";
+import {
+  IconFileDownload,
+  IconFileUpload,
+  IconTemplate,
+} from "@tabler/icons-react";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FristTemplate from "../../../Resume_Preview/Templates/First.Template/First.template";
@@ -19,6 +23,7 @@ import useRightSectionStyle from "./RightSection.style";
 import ChangeTemplatesModalHeader from "./Templates_Modal/ChangeTemplateModalHeader";
 import ChangeTemplateModalRightSection from "./Templates_Modal/ChangeTemplateModalRightSection";
 import { uploadCVData } from "../../../store/forms.reducer";
+import ForthTemplate from "../../../Resume_Preview/Templates/forth-Template/Forth.template";
 
 const RightSection = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -33,9 +38,9 @@ const RightSection = () => {
   } = useRightSectionStyle();
   const theme = useMantineTheme();
 
-  const uploadCVJsonFile = useRef()
+  const uploadCVJsonFile = useRef();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const downloadData = () => {
     // fetchData(); // Fetch the data when the button is clicked
@@ -57,7 +62,7 @@ const RightSection = () => {
   };
 
   const UploadData = (event) => {
-    debugger
+    debugger;
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -65,16 +70,13 @@ const RightSection = () => {
       reader.onload = (e) => {
         try {
           const jsonData = JSON.parse(e.target.result);
-            dispatch(uploadCVData(jsonData));
+          dispatch(uploadCVData(jsonData));
         } catch (error) {
-          console.error('Error parsing JSON file:', error);
+          console.error("Error parsing JSON file:", error);
         }
       };
 
-
-
       reader.readAsText(file);
-
     }
   };
 
@@ -123,13 +125,19 @@ const RightSection = () => {
                   <IconFileDownload />
                 </ActionIcon>
 
-                <Input style={{ display: 'none' }} ref={uploadCVJsonFile} type="file" accept=".json" onChange={UploadData} />
+                <Input
+                  style={{ display: "none" }}
+                  ref={uploadCVJsonFile}
+                  type="file"
+                  accept=".json"
+                  onChange={UploadData}
+                />
                 <ActionIcon
                   variant="gradient"
                   title="Upload CV Data"
                   mr={12}
                   onClick={() => {
-                    uploadCVJsonFile.current.click()
+                    uploadCVJsonFile.current.click();
                   }}
                 >
                   <IconFileUpload />
@@ -164,7 +172,7 @@ const RightSection = () => {
                 <Flex>
                   {/* Template */}
                   <Box>
-                    <FristTemplate />
+                    <ForthTemplate />
                   </Box>
                 </Flex>
               </Box>
