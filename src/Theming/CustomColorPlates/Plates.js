@@ -299,3 +299,8 @@ export const colorPlates = {
     },
   },
 };
+
+
+export const colorPateNames = [
+  "blue", "yellow"
+]

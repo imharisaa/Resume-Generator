@@ -42,7 +42,7 @@ export const useResumeStyles = createStyles((theme) => ({
   left_section_buttonClosed: {
     height: "100vh",
     backgroundColor: "lightsteelblue",
-    boxShadow: `3px 0px 10px 0px ${theme.colors.custom.first.lightGreyishBlue}`,
+    boxShadow: `3px 0px 10px 0px ${theme.colors.custom.lightGreyishBlue}`,
     border: "none",
     position: "relative",
     ":active": {

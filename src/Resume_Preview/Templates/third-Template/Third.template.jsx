@@ -56,7 +56,7 @@ const ThirdTemplate = () => {
           <Heading1
             width={"15rem"}
             alignment={"center"}
-            color={theme.colors.custom.first.heading1.light}
+            color={theme.colors.custom.heading1.light}
           >
             {firstName ? firstName : "Your Name"}
           </Heading1>
@@ -64,7 +64,7 @@ const ThirdTemplate = () => {
           <Heading1
             width={"15rem"}
             alignment={"center"}
-            color={theme.colors.custom.first.heading1.light}
+            color={theme.colors.custom.heading1.light}
           >
             {lastName}
           </Heading1>
@@ -84,7 +84,7 @@ const ThirdTemplate = () => {
             <Heading2
               width={"15rem"}
               alignment={"start"}
-              color={theme.colors.custom.first.heading1.light}
+              color={theme.colors.custom.heading1.light}
             >
               Contact
             </Heading2>
@@ -122,7 +122,7 @@ const ThirdTemplate = () => {
             <Heading2
               width={"15rem"}
               alignment={"start"}
-              color={theme.colors.custom.first.heading1.light}
+              color={theme.colors.custom.heading1.light}
             >
               Skills
             </Heading2>
@@ -144,7 +144,7 @@ const ThirdTemplate = () => {
                     ? ""
                     : item.groupTitle === ""
                     ? ""
-                    : theme.colors.custom.first.darker
+                    : theme.colors.custom.darker
                 }
               >
                 <Box
@@ -174,7 +174,7 @@ const ThirdTemplate = () => {
                   <Heading6
                     width={"15rem"}
                     alignment={"start"}
-                    color={theme.colors.custom.first.heading1.light}
+                    color={theme.colors.custom.heading1.light}
                   >
                     {item.groupTitle === "Skill Group Title"
                       ? ""

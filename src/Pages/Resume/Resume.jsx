@@ -55,7 +55,7 @@ const Resume = () => {
         </ActionIcon>
       </Box>
       <Box className={right_section}>
-        <Paper bg={'lightgray'} padding="lg">
+        <Paper padding="lg">
           <RightSection />
         </Paper>
       </Box>
