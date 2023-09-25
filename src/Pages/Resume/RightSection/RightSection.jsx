@@ -15,15 +15,12 @@ import {
   IconFileUpload,
   IconTemplate,
 } from "@tabler/icons-react";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import FristTemplate from "../../../Resume_Preview/Templates/First.Template/First.template";
-import { colorPlates } from "../../../Theming/CustomColorPlates/Plates";
+import { templateMaper, uploadCVData } from "../../../store/forms.reducer";
 import useRightSectionStyle from "./RightSection.style";
 import ChangeTemplatesModalHeader from "./Templates_Modal/ChangeTemplateModalHeader";
 import ChangeTemplateModalLeftSection from "./Templates_Modal/ChangeTemplateModalLeftSection";
-import { uploadCVData } from "../../../store/forms.reducer";
-import ForthTemplate from "../../../Resume_Preview/Templates/forth-Template/Forth.template";
 import ChangeTemplateModalRightSection from "./Templates_Modal/ChangeTemplateModalRightSection";
 
 
@@ -32,6 +29,7 @@ const RightSection = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const colorPlate = useSelector((state) => state.theme.currentPlate);
   const cvData = useSelector((state) => state.forms);
+  const Template = templateMaper[cvData.template]
   const {
     classes: {
       right_section_container,
@@ -169,8 +167,8 @@ const RightSection = () => {
                 <Flex>
                   {/* Template */}
                   <Box>
-                    {/* {templates} */}
-                    <FristTemplate />
+                    <Template />
+                    {/* <FristTemplate /> */}
                   </Box>
                 </Flex>
               </Box>

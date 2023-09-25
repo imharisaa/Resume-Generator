@@ -3,7 +3,6 @@ import { createStyles } from "@mantine/core";
 export const useForthTemplateStyle = createStyles((theme) => ({
   Forth_Template__container: {
     display: "table",
-    boxShadow: '0px 0px 6px 5px #7c797954'
   },
   Forth_Template__col_1: {
     display: "table-cell",

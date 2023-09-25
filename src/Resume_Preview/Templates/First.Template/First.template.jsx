@@ -10,11 +10,7 @@ import {
 } from "../../../components/Typography/Headings";
 import { useSelector } from "react-redux";
 
-
 const FristTemplate = () => {
-
-
-
   const firstTemplateData = useSelector((state) => state.forms);
   const {
     classes: {
@@ -35,9 +31,14 @@ const FristTemplate = () => {
   } = useFirstTemplateStyle();
 
   const theme = useMantineTheme();
-  
+
   return (
-    <Box className={First_Template__container} bg={'whitesmoke'} h={"297mm"} w={"210mm"}>
+    <Box
+      className={First_Template__container}
+      bg={"whitesmoke"}
+      h={"297mm"}
+      w={"210mm"}
+    >
       <Box className={First_Template__col_1}>
         <Box
           w={"15rem"}
@@ -244,7 +245,7 @@ const FristTemplate = () => {
             </Box>
             {firstTemplateData.employmentHistory.map((item, key) => {
               return (
-                <Box w="100%" pt={'24px'}>
+                <Box w="100%" pt={"24px"}>
                   <Flex justify={"space-between"} w={"100%"}>
                     <Box w={"50%"}>
                       <Heading4>{item.jobTitle}</Heading4>
@@ -254,8 +255,8 @@ const FristTemplate = () => {
                       </Text>
                     </Box>
                     <Box w={"50%"}>
-                      <Flex align={'center'} w={'100%'} h={'100%'}>
-                        <Text weight={'bolder'} color="#737272">
+                      <Flex align={"center"} w={"100%"} h={"100%"}>
+                        <Text weight={"bolder"} color="#737272">
                           {`${item.startDate} - ${item.endDate}`}
                         </Text>
                       </Flex>

@@ -7,7 +7,7 @@ import {
   Heading3,
   Heading4,
   Heading6,
-} from "../../../components/Typography/Headings";
+} from "../../components/Typography/Headings";
 import { useSelector } from "react-redux";
 
 const SecondTemplate = () => {
