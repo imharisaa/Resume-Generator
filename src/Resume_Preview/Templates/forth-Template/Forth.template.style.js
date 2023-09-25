@@ -1,29 +1,32 @@
-import { Space, createStyles } from "@mantine/core";
+import { createStyles } from "@mantine/core";
 
-export const useFirstTemplateStyle = createStyles((theme) => ({
-  First_Template__container: {
+export const useForthTemplateStyle = createStyles((theme) => ({
+  Forth_Template__container: {
     display: "table",
     boxShadow: '0px 0px 6px 5px #7c797954'
   },
-  First_Template__col_1: {
+  Forth_Template__col_1: {
     display: "table-cell",
-    backgroundColor: theme.colors.custom.normal,
+    backgroundColor: "#f4f4f4",
     width: "15rem",
+    paddingLeft: 15,
+    paddingRight: 15,
   },
-  First_Template__col_2: {
+  Forth_Template__col_2: {
     display: "table-cell",
-    width: "calc( 100% - 15rem )",
+    width: "calc( 100% - 10rem ) !important",
+    padding: "0 15px 15px 15px",
   },
 
   //? Name & Profession Component Styling
 
   Name_And_Profession__container: {
-    marginBottom: "24px",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    justifyItems: "cetner",
-    padding: "12px",
+    alignItems: "start",
+    justifyItems: "center",
+    flexWrap: "wrap",
+    padding: "16px",
   },
 
   //? Contact Component Styling
@@ -32,7 +35,7 @@ export const useFirstTemplateStyle = createStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
-    paddingBottom: '12px'
+    paddingBottom: "12px",
   },
 
   Contact_Component__contact_heading: {
@@ -41,7 +44,7 @@ export const useFirstTemplateStyle = createStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     padding: "12px",
-    backgroundColor: theme.colors.custom.dark,
+    // backgroundColor: theme.colors.custom.dark,
   },
 
   Contact_Component__content_email__container: {
@@ -68,7 +71,7 @@ export const useFirstTemplateStyle = createStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
-    paddingBottom: '12px'
+    paddingBottom: "12px",
   },
 
   Skill_Component__skills_heading: {
@@ -77,7 +80,7 @@ export const useFirstTemplateStyle = createStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     padding: "12px",
-    backgroundColor: theme.colors.custom.dark,
+    // backgroundColor: theme.colors.custom.dark,
   },
 
   Skill_Component__skill_heading: {
@@ -88,19 +91,24 @@ export const useFirstTemplateStyle = createStyles((theme) => ({
   },
 
   Skill_Component__content_container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    height: '35px',
-    width: '90%'
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    height: "35px",
+    width: "90%",
   },
 
-  //? Working History Style
+  Contact_heading: {
+    borderBottom: "1px solid #d5d6d6",
+  },
 
-  Work_History_Component__heading_container: {
-    borderTop: '5px solid lightgrey',
-    borderBottom: '5px solid lightgrey',
-    borderRadius: '5px',
-  }
+  workHistory_header: {
+    borderBottom: "1px solid #d5d6d6",
+    paddingTop: "12px",
+  },
 
+  skillsheading: {
+    paddingBottom: "15px",
+    paddingTop: "24px",
+  },
 }));

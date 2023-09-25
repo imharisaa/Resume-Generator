@@ -40,7 +40,7 @@ const ThirdTemplate = () => {
       <Box p={"12px"} className={Third_Template__col_2}>
         <Flex direction={"column"}>
           <ProfessionalSummary />
-          <WorkHistory />
+          <WorkHistory childPadding={"12px"} parentPadding={"12px"} />
           <Education />
         </Flex>
       </Box>
@@ -56,7 +56,7 @@ const ThirdTemplate = () => {
           <Heading1
             width={"15rem"}
             alignment={"center"}
-            color={theme.colors.custom.first.heading1.light}
+            color={theme.colors.custom.heading1.light}
           >
             {firstName ? firstName : "Your Name"}
           </Heading1>
@@ -64,7 +64,7 @@ const ThirdTemplate = () => {
           <Heading1
             width={"15rem"}
             alignment={"center"}
-            color={theme.colors.custom.first.heading1.light}
+            color={theme.colors.custom.heading1.light}
           >
             {lastName}
           </Heading1>
@@ -84,7 +84,7 @@ const ThirdTemplate = () => {
             <Heading2
               width={"15rem"}
               alignment={"start"}
-              color={theme.colors.custom.first.heading1.light}
+              color={theme.colors.custom.heading1.light}
             >
               Contact
             </Heading2>
@@ -122,7 +122,7 @@ const ThirdTemplate = () => {
             <Heading2
               width={"15rem"}
               alignment={"start"}
-              color={theme.colors.custom.first.heading1.light}
+              color={theme.colors.custom.heading1.light}
             >
               Skills
             </Heading2>
@@ -144,7 +144,7 @@ const ThirdTemplate = () => {
                     ? ""
                     : item.groupTitle === ""
                     ? ""
-                    : theme.colors.custom.first.darker
+                    : theme.colors.custom.darker
                 }
               >
                 <Box
@@ -174,7 +174,7 @@ const ThirdTemplate = () => {
                   <Heading6
                     width={"15rem"}
                     alignment={"start"}
-                    color={theme.colors.custom.first.heading1.light}
+                    color={theme.colors.custom.heading1.light}
                   >
                     {item.groupTitle === "Skill Group Title"
                       ? ""
@@ -239,10 +239,10 @@ const ThirdTemplate = () => {
 
 export default ThirdTemplate;
 
-function ProfessionalSummary() {
+export function ProfessionalSummary({ padding }) {
   const thirdTemplateData = useSelector((state) => state.forms);
   return (
-    <Box w={"100%"} p={"24px"}>
+    <Box w={"100%"} p={padding ? padding : "24px"}>
       <div
         style={{
           color: "lightslategray",
@@ -255,14 +255,20 @@ function ProfessionalSummary() {
   );
 }
 
-function WorkHistory() {
+export function WorkHistory({ className, childPadding, parentPadding }) {
   const thirdTemplateData = useSelector((state) => state.forms);
   const {
     classes: { Work_History_Component__heading_container },
   } = useThirdTemplateStyle();
   return (
-    <Box w={"100%"} p={"12px"}>
-      <Box p={"12px"} className={Work_History_Component__heading_container}>
+    <Box w={"100%"} p={parentPadding} id="iddfie">
+      <Box
+        id="dfiddfoie"
+        p={childPadding}
+        className={
+          className ? className : Work_History_Component__heading_container
+        }
+      >
         <Heading3>Work History</Heading3>
       </Box>
       {thirdTemplateData.employmentHistory.map((item, key) => {
@@ -302,7 +308,7 @@ function WorkHistory() {
   );
 }
 
-function Education() {
+export function Education() {
   const thirdTemplateData = useSelector((state) => state.forms);
   console.log(thirdTemplateData.education.detials);
   const {
