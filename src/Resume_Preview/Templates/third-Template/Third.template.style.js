@@ -3,10 +3,11 @@ import { createStyles } from "@mantine/core";
 export const useThirdTemplateStyle = createStyles((theme) => ({
   Third_Template__container: {
     display: "table",
+    boxShadow: '0px 0px 6px 5px #7c797954'
   },
   Third_Template__col_1: {
     display: "table-cell",
-    backgroundColor: theme.colors.custom.first.normal,
+    backgroundColor: theme.colors.custom.normal,
     width: "15rem",
   },
   Third_Template__col_2: {
@@ -40,7 +41,7 @@ export const useThirdTemplateStyle = createStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     padding: "12px",
-    backgroundColor: theme.colors.custom.first.dark,
+    backgroundColor: theme.colors.custom.dark,
   },
 
   Contact_Component__content_email__container: {
@@ -76,7 +77,7 @@ export const useThirdTemplateStyle = createStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     padding: "12px",
-    backgroundColor: theme.colors.custom.first.dark,
+    backgroundColor: theme.colors.custom.dark,
   },
 
   Skill_Component__skill_heading: {

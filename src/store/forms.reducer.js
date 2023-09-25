@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const formsSlice = createSlice({
   name: "forms",
   initialState: {
+    // template: `${}`,
     personal_details: {
       wantedJobTitle: "",
       pfpUri: "",

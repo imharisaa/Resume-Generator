@@ -44,7 +44,7 @@ const SecondTemplate = () => {
           <Heading1
             width={"15rem"}
             alignment={"center"}
-            color={theme.colors.custom.first.heading1.light}
+            color={theme.colors.custom.heading1.light}
           >
             {secondTemplateData.personal_details.firstName
               ? secondTemplateData.personal_details.firstName
@@ -53,7 +53,7 @@ const SecondTemplate = () => {
           <Heading1
             width={"15rem"}
             alignment={"center"}
-            color={theme.colors.custom.first.heading1.light}
+            color={theme.colors.custom.heading1.light}
           >
             {secondTemplateData.personal_details.lastName}
           </Heading1>
@@ -73,7 +73,7 @@ const SecondTemplate = () => {
             <Heading2
               width={"15rem"}
               alignment={"start"}
-              color={theme.colors.custom.first.heading1.light}
+              color={theme.colors.custom.heading1.light}
             >
               Contact
             </Heading2>
@@ -108,7 +108,7 @@ const SecondTemplate = () => {
             <Heading2
               width={"15rem"}
               alignment={"start"}
-              color={theme.colors.custom.first.heading1.light}
+              color={theme.colors.custom.heading1.light}
             >
               Skills
             </Heading2>
@@ -130,7 +130,7 @@ const SecondTemplate = () => {
                     ? ""
                     : item.groupTitle === ""
                     ? ""
-                    : theme.colors.custom.first.darker
+                    : theme.colors.custom.darker
                 }
               >
                 <Box
@@ -160,7 +160,7 @@ const SecondTemplate = () => {
                   <Heading6
                     width={"15rem"}
                     alignment={"start"}
-                    color={theme.colors.custom.first.heading1.light}
+                    color={theme.colors.custom.heading1.light}
                   >
                     {item.groupTitle === "Skill Group Title"
                       ? ""

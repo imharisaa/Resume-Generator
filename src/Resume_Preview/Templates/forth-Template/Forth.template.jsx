@@ -49,7 +49,7 @@ const ForthTemplate = () => {
             <Heading1
               width={"25rem"}
               alignment={"start"}
-              color={theme.colors.custom.first.heading1.light}
+              color={theme.colors.custom.heading1.light}
             >
               {firstName ? firstName : "Your Name"}
             </Heading1>
@@ -57,7 +57,7 @@ const ForthTemplate = () => {
             <Heading1
               width={"25rem"}
               alignment={"start"}
-              color={theme.colors.custom.first.heading1.light}
+              color={theme.colors.custom.heading1.light}
             >
               {lastName}
             </Heading1>
@@ -159,7 +159,7 @@ const ForthTemplate = () => {
                       ? ""
                       : item.groupTitle === ""
                       ? ""
-                      : theme.colors.custom.first.darker
+                      : theme.colors.custom.darker
                   }
                 >
                   <Box
@@ -189,7 +189,7 @@ const ForthTemplate = () => {
                     <Heading6
                       width={"15rem"}
                       alignment={"start"}
-                      color={theme.colors.custom.first.heading1.light}
+                      color={theme.colors.custom.heading1.light}
                     >
                       {item.groupTitle === "Skill Group Title"
                         ? ""
@@ -270,7 +270,7 @@ export default ForthTemplate;
 //   <Heading1
 //     width={"15rem"}
 //     alignment={"center"}
-//     color={theme.colors.custom.first.heading1.light}
+//     color={theme.colors.custom.heading1.light}
 //   >
 //     {firstName ? firstName : "Your Name"}
 //   </Heading1>
@@ -278,7 +278,7 @@ export default ForthTemplate;
 //   <Heading1
 //     width={"15rem"}
 //     alignment={"center"}
-//     color={theme.colors.custom.first.heading1.light}
+//     color={theme.colors.custom.heading1.light}
 //   >
 //     {lastName}
 //   </Heading1>

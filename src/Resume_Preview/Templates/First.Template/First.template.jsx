@@ -1,5 +1,5 @@
 import { Box, Flex, Slider, Text, useMantineTheme } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 import { useFirstTemplateStyle } from "./First.template.style";
 import {
   Heading1,
@@ -10,7 +10,11 @@ import {
 } from "../../../components/Typography/Headings";
 import { useSelector } from "react-redux";
 
+
 const FristTemplate = () => {
+
+
+
   const firstTemplateData = useSelector((state) => state.forms);
   const {
     classes: {
@@ -31,7 +35,7 @@ const FristTemplate = () => {
   } = useFirstTemplateStyle();
 
   const theme = useMantineTheme();
-
+  
   return (
     <Box className={First_Template__container} bg={'whitesmoke'} h={"297mm"} w={"210mm"}>
       <Box className={First_Template__col_1}>
@@ -43,7 +47,7 @@ const FristTemplate = () => {
           <Heading1
             width={"15rem"}
             alignment={"center"}
-            color={theme.colors.custom.first.heading1.light}
+            color={theme.colors.custom.heading1.light}
           >
             {firstTemplateData.personal_details.firstName
               ? firstTemplateData.personal_details.firstName
@@ -52,7 +56,7 @@ const FristTemplate = () => {
           <Heading1
             width={"15rem"}
             alignment={"center"}
-            color={theme.colors.custom.first.heading1.light}
+            color={theme.colors.custom.heading1.light}
           >
             {firstTemplateData.personal_details.lastName}
           </Heading1>
@@ -72,7 +76,7 @@ const FristTemplate = () => {
             <Heading2
               width={"15rem"}
               alignment={"start"}
-              color={theme.colors.custom.first.heading1.light}
+              color={theme.colors.custom.heading1.light}
             >
               Contact
             </Heading2>
@@ -107,7 +111,7 @@ const FristTemplate = () => {
             <Heading2
               width={"15rem"}
               alignment={"start"}
-              color={theme.colors.custom.first.heading1.light}
+              color={theme.colors.custom.heading1.light}
             >
               Skills
             </Heading2>
@@ -129,7 +133,7 @@ const FristTemplate = () => {
                     ? ""
                     : item.groupTitle === ""
                     ? ""
-                    : theme.colors.custom.first.darker
+                    : theme.colors.custom.darker
                 }
               >
                 <Box
@@ -159,7 +163,7 @@ const FristTemplate = () => {
                   <Heading6
                     width={"15rem"}
                     alignment={"start"}
-                    color={theme.colors.custom.first.heading1.light}
+                    color={theme.colors.custom.heading1.light}
                   >
                     {item.groupTitle === "Skill Group Title"
                       ? ""

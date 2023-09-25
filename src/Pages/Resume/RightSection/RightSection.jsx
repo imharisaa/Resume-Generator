@@ -21,13 +21,16 @@ import FristTemplate from "../../../Resume_Preview/Templates/First.Template/Firs
 import { colorPlates } from "../../../Theming/CustomColorPlates/Plates";
 import useRightSectionStyle from "./RightSection.style";
 import ChangeTemplatesModalHeader from "./Templates_Modal/ChangeTemplateModalHeader";
-import ChangeTemplateModalRightSection from "./Templates_Modal/ChangeTemplateModalRightSection";
+import ChangeTemplateModalLeftSection from "./Templates_Modal/ChangeTemplateModalLeftSection";
 import { uploadCVData } from "../../../store/forms.reducer";
 import ForthTemplate from "../../../Resume_Preview/Templates/forth-Template/Forth.template";
+import ChangeTemplateModalRightSection from "./Templates_Modal/ChangeTemplateModalRightSection";
+
+
 
 const RightSection = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const themeData = useSelector((state) => state.theme.colorPlate);
+  const colorPlate = useSelector((state) => state.theme.currentPlate);
   const cvData = useSelector((state) => state.forms);
   const {
     classes: {
@@ -43,8 +46,6 @@ const RightSection = () => {
   const dispatch = useDispatch();
 
   const downloadData = () => {
-    // fetchData(); // Fetch the data when the button is clicked
-
     // Convert the data to JSON
     const jsonData = JSON.stringify(cvData, null, 2);
 
@@ -89,17 +90,11 @@ const RightSection = () => {
         w={"100vw"}
       >
         <Grid gutter={"lg"}>
-          <Flex
-            justify={"center"}
-            bg={"lightgray"}
-            align={"center"}
-            w={"100%"}
-            h={"100%"}
-          >
+          <Flex justify={"center"} align={"center"} w={"100%"} h={"100%"}>
             <MantineProvider
               theme={{
                 colors: {
-                  custom: colorPlates.blue,
+                  custom: colorPlate,
                 },
               }}
             >
@@ -161,9 +156,11 @@ const RightSection = () => {
                     </Box>
                     <Flex w={"100%"}>
                       <Box w={"50%"}>
+                        <ChangeTemplateModalLeftSection />
+                      </Box>
+                      <Box w={"50%"}>
                         <ChangeTemplateModalRightSection />
                       </Box>
-                      <Box w={"50%"}></Box>
                     </Flex>
                   </Flex>
                 </Modal>
@@ -172,7 +169,8 @@ const RightSection = () => {
                 <Flex>
                   {/* Template */}
                   <Box>
-                    <ForthTemplate />
+                    {/* {templates} */}
+                    <FristTemplate />
                   </Box>
                 </Flex>
               </Box>
