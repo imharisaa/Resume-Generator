@@ -1,13 +1,19 @@
 import { Box, createStyles } from "@mantine/core";
 import React from "react";
 import FristTemplate from "../../../../Resume_Preview/Templates/First.Template/First.template";
+import { useSelector } from "react-redux";
+import { templateMaper } from "../../../../store/forms.reducer";
 
 const ChangeTemplateModalLeftSection = () => {
   const { classes } = useChangeTemplateModalLeftSectionStyle();
+  const templateData = useSelector((state) => state.forms.previewTemplate)
+
+  const PreviewTemplate = templateMaper[templateData]
+
   return (
     <Box style={{ borderRight: '1px solid lightgrey' }} className={classes.container} w={"100%"} h={"46rem"}>
       <Box className={classes.page_container}>
-        <FristTemplate />
+        <PreviewTemplate />
       </Box>
     </Box>
   );
