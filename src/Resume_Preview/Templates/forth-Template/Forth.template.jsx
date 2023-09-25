@@ -42,8 +42,8 @@ const ForthTemplate = () => {
   const theme = useMantineTheme();
 
   return (
-    <Box bg={"white"}>
-      <Box p={15} width={"100%"} bg="#294d9e">
+    <Box style={{boxShadow: '0px 0px 6px 5px #7c797954'}} bg={"white"} h={"297mm"} w={"210mm"}>
+      <Box p={15} width={"100%"} bg={theme.colors.custom.normal}>
         <Box className={Name_And_Profession__container}>
           <Box>
             <Heading1
@@ -69,7 +69,7 @@ const ForthTemplate = () => {
         </Box>
       </Box>
 
-      <Box className={Forth_Template__container} h={"297mm"} w={"210mm"}>
+      <Box className={Forth_Template__container} w={'100%'} h={'88%'}>
         <Box className={Forth_Template__col_2}>
           <Flex direction={"column"}>
             <ProfessionalSummary padding={"55px 0 20px 0"} />

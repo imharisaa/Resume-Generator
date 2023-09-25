@@ -1,10 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
+import FristTemplate from "../Resume_Preview/Templates/First.Template/First.template";
+import SecondTemplate from "../Resume_Preview/Second.Template/Second.template";
+import ThirdTemplate from "../Resume_Preview/Templates/third-Template/Third.template";
+import ForthTemplate from "../Resume_Preview/Templates/forth-Template/Forth.template";
 
+export const templateMaper = {
+  "FristTemplate": FristTemplate,
+  "SecondTemplate": SecondTemplate,
+  "ThirdTemplate": ThirdTemplate,
+  "ForthTemplate": ForthTemplate
+}
+
+export const templates = [
+  "FristTemplate",
+  "SecondTemplate",
+  "ThirdTemplate",
+  "ForthTemplate",
+];
 
 const formsSlice = createSlice({
   name: "forms",
   initialState: {
-    // template: `${}`,
+    template: "FristTemplate",
+    previewTemplate: "FristTemplate",
     personal_details: {
       wantedJobTitle: "",
       pfpUri: "",
@@ -161,6 +179,14 @@ const formsSlice = createSlice({
       state.professionalSummary = data.payload.professionalSummary
       state.skills = data.payload.skills
       state.websiteAndSocialLinks = data.payload.websiteAndSocialLinks
+    },
+
+    changeTemplate(state, data) {
+      state.template = data.payload
+    },
+
+    changePreviewTemplate(state, data) {
+      state.previewTemplate = data.payload
     }
   },
 
@@ -187,6 +213,8 @@ export const {
   updateSkillGroup,
   deleteSkillGroup,
   addGroupSkills,
-  uploadCVData
+  uploadCVData,
+  changePreviewTemplate,
+  changeTemplate
 } = formsSlice.actions;
 export default formsSlice.reducer;
