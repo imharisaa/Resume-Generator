@@ -1,18 +1,29 @@
-import { ActionIcon, Box, Flex, Title, createStyles } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Flex,
+  Menu,
+  Title,
+  createStyles,
+} from "@mantine/core";
 import { IconSquareRoundedXFilled } from "@tabler/icons-react";
 import React, { useEffect, useState } from "react";
 import {
   colorPateNames,
   colorPlates,
 } from "../../../../Theming/CustomColorPlates/Plates";
-import { hoverEnd, hoverOver, selectedPlate } from "../../../../store/theme.reducer";
+import {
+  hoverEnd,
+  hoverOver,
+  selectedPlate,
+} from "../../../../store/theme.reducer";
 import { useDispatch } from "react-redux";
 
 const ChangeTemplatesModalHeader = ({ close }) => {
   const { classes } = useChangeTemplateModalHeaderStyle();
   return (
     <Box
-      style={{ borderBottom: "2px solid lightgrey" }}
+      style={{ borderBottom: "2px solid lightgrey", zIndex: 1 }}
       h={"50px"}
       className={classes.container}
     >
@@ -35,41 +46,8 @@ const ChangeTemplatesModalHeader = ({ close }) => {
 
 export default ChangeTemplatesModalHeader;
 
-// const PlateSelector = ({ color }) => {
-//   return (
-//     <>
-//       <Flex w={50} justify={'center'} direction={'column'} >
-//         <Box
-//           w={25}
-//           h={25}
-//           mb={12}
-//           mr={12}
-//           style={{ borderRadius: 5 }}
-//           bg={colorPlates[color].first.normal}
-//         />
-//         <Box
-//           w={25}
-//           h={25}
-//           mb={12}
-//           mr={12}
-//           style={{ borderRadius: 5 }}
-//           bg={colorPlates[color].second.normal}
-//         />
-//         <Box
-//           w={25}
-//           h={25}
-//           mr={12}
-//           mb={12}
-//           style={{ borderRadius: 5 }}
-//           bg={colorPlates[color].third.normal}
-//         />
-//       </Flex>
-//     </>
-//   );
-// };
-
 const PlateSelector = ({ color }) => {
-  const selectors = ['first', 'second', 'third'];
+  // const selectors = ["first", "second", "third"];
   const [selectedSelector, setSelectedSelector] = useState(null);
   const dispatch = useDispatch(); // Replace with your useDispatch from react-redux
 
@@ -94,29 +72,57 @@ const PlateSelector = ({ color }) => {
     setSelectedSelector(null);
   };
 
-
   return (
     <>
-      <Flex w={50} justify={'center'} direction={'column'}>
-        {selectors.map((selector, index) => (
-          <Box
-            key={index}
-            w={25}
-            h={25}
-            mb={12}
-            mr={12}
-            style={{ borderRadius: 5 }}
-            bg={colorPlates[color][selector].normal}
-            onMouseEnter={() => handleMouseEnter(selector)}
-            onMouseLeave={handleMouseLeave}
-            onClick={() => handleBoxClick(selector)}
-          />
-        ))}
+      <Flex w={50} justify={"center"} direction={"column"}>
+        {/* {selectors.map((selector, index) => ( */}
+        <Menu trigger="hover" withArrow withinPortal>
+          <Menu.Target>
+            <ActionIcon w={40} h={40}>
+              <Box
+                w={35}
+                h={35}
+                style={{ borderRadius: 10 }}
+                bg={colorPlates[color]["first"].normal}
+                onMouseEnter={() => handleMouseEnter("first")}
+                onMouseLeave={handleMouseLeave}
+                onClick={() => handleBoxClick("first")}
+              />
+            </ActionIcon>
+          </Menu.Target>
+          <Menu.Dropdown style={{ borderRadius: 20, backgroundColor: 'whitesmoke', maxWidth: '4.5rem' }}>
+            <Menu.Item>
+              <ActionIcon w={40} h={40}>
+                <Box
+                  w={35}
+                  h={35}
+                  style={{ borderRadius: 10 }}
+                  bg={colorPlates[color]["second"].normal}
+                  onMouseEnter={() => handleMouseEnter("second")}
+                  onMouseLeave={handleMouseLeave}
+                  onClick={() => handleBoxClick("second")}
+                />
+              </ActionIcon>
+            </Menu.Item>
+            <Menu.Item>
+              <ActionIcon w={40} h={40}>
+                <Box
+                  w={35}
+                  h={35}
+                  style={{ borderRadius: 10 }}
+                  bg={colorPlates[color]["third"].normal}
+                  onMouseEnter={() => handleMouseEnter("third")}
+                  onMouseLeave={handleMouseLeave}
+                  onClick={() => handleBoxClick("third")}
+                />
+              </ActionIcon>
+            </Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
       </Flex>
     </>
   );
 };
-
 
 const useChangeTemplateModalHeaderStyle = createStyles((theme) => ({
   container: {
