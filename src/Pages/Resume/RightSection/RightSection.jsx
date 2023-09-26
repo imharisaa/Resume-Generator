@@ -11,9 +11,9 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
+  IconEye,
   IconFileDownload,
-  IconFileUpload,
-  IconTemplate,
+  IconFileUpload
 } from "@tabler/icons-react";
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -105,7 +105,7 @@ const RightSection = () => {
                   mr={12}
                   onClick={open}
                 >
-                  <IconTemplate />
+                  <IconEye />
                 </ActionIcon>
 
                 <ActionIcon
