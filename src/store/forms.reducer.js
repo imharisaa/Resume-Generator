@@ -45,6 +45,7 @@ const formsSlice = createSlice({
     employmentHistory: [],
     education: [],
     websiteAndSocialLinks: [],
+    languageSkills: [],
     skills: [
       {
         groupId: "c3593bc4-0d1f-4bf6-bb74-95214a6d7c89",
@@ -187,6 +188,22 @@ const formsSlice = createSlice({
 
     changePreviewTemplate(state, data) {
       state.previewTemplate = data.payload
+    },
+
+    //? Language Skill Reducer
+
+    addLanguageSkill(state, data) {
+      state.languageSkills.push(data.payload)
+    },
+
+    updateLanguageSkill(state, data) {
+      state.languageSkills[data.payload.key].level = data.payload.level
+      state.languageSkills[data.payload.key].levelColor = data.payload.levelColor
+      state.languageSkills[data.payload.key].title = data.payload.title
+    },
+
+    deleteLanguageSkill(state, data) {
+
     }
   },
 
@@ -215,6 +232,9 @@ export const {
   addGroupSkills,
   uploadCVData,
   changePreviewTemplate,
-  changeTemplate
+  changeTemplate,
+  addLanguageSkill,
+  deleteLanguageSkill,
+  updateLanguageSkill
 } = formsSlice.actions;
 export default formsSlice.reducer;
