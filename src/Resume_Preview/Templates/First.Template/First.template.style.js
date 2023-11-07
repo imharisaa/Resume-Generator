@@ -3,7 +3,7 @@ import { Space, createStyles } from "@mantine/core";
 export const useFirstTemplateStyle = createStyles((theme) => ({
   First_Template__container: {
     display: "table",
-    boxShadow: '0px 0px 6px 5px #7c797954'
+    boxShadow: "0px 0px 6px 5px #7c797954",
   },
   First_Template__col_1: {
     display: "table-cell",
@@ -32,7 +32,7 @@ export const useFirstTemplateStyle = createStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
-    paddingBottom: '12px'
+    paddingBottom: "12px",
   },
 
   Contact_Component__contact_heading: {
@@ -41,7 +41,7 @@ export const useFirstTemplateStyle = createStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     padding: "12px",
-    backgroundColor: theme.colors.custom.dark,
+    backgroundColor: theme.colors.custom.light,
   },
 
   Contact_Component__content_email__container: {
@@ -68,7 +68,8 @@ export const useFirstTemplateStyle = createStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
-    paddingBottom: '12px'
+    paddingBottom: "12px",
+    backgroundColor: theme.colors.custom.light,
   },
 
   Skill_Component__skills_heading: {
@@ -77,7 +78,7 @@ export const useFirstTemplateStyle = createStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     padding: "12px",
-    backgroundColor: theme.colors.custom.dark,
+    // backgroundColor: theme.colors.custom.dark,
   },
 
   Skill_Component__skill_heading: {
@@ -88,19 +89,18 @@ export const useFirstTemplateStyle = createStyles((theme) => ({
   },
 
   Skill_Component__content_container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    height: '35px',
-    width: '90%'
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    height: "35px",
+    width: "90%",
   },
 
   //? Working History Style
 
   Work_History_Component__heading_container: {
-    borderTop: '5px solid lightgrey',
-    borderBottom: '5px solid lightgrey',
-    borderRadius: '5px',
-  }
-
+    borderTop: "5px solid lightgrey",
+    borderBottom: "5px solid lightgrey",
+    borderRadius: "5px",
+  },
 }));

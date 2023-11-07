@@ -6,10 +6,10 @@ import {
   Heading2,
   Heading3,
   Heading4,
+  Heading5,
   Heading6,
 } from "../../../components/Typography/Headings";
 import { useSelector } from "react-redux";
-
 const FristTemplate = () => {
   const firstTemplateData = useSelector((state) => state.forms);
   const {
@@ -48,6 +48,7 @@ const FristTemplate = () => {
           <Heading1
             width={"15rem"}
             alignment={"center"}
+            fw={600}
             color={theme.colors.custom.heading1.light}
           >
             {firstTemplateData.personal_details.firstName
@@ -57,11 +58,17 @@ const FristTemplate = () => {
           <Heading1
             width={"15rem"}
             alignment={"center"}
+            fw={600}
             color={theme.colors.custom.heading1.light}
           >
             {firstTemplateData.personal_details.lastName}
           </Heading1>
-          <Text color={"gray"} pt={"3px"} size={"15px"}>
+          <Text
+            color={theme.colors.custom.heading1.lighter}
+            pt={"3px"}
+            size={"15px"}
+            pl={15}
+          >
             {firstTemplateData.personal_details.wantedJobTitle
               ? firstTemplateData.personal_details.wantedJobTitle
               : "Profession"}
@@ -73,14 +80,14 @@ const FristTemplate = () => {
           mah={"fit-content"}
           className={Contact_Component__container}
         >
-          <Box className={Contact_Component__contact_heading}>
-            <Heading2
+          <Box id="jfoie" className={Contact_Component__contact_heading}>
+            <Heading3
               width={"15rem"}
               alignment={"start"}
-              color={theme.colors.custom.heading1.light}
+              color={theme.colors.custom.heading3.light}
             >
               Contact
-            </Heading2>
+            </Heading3>
           </Box>
           <Box className={Contact_Component__content_email__container}>
             <Heading6 width={"15rem"} alignment={"start"} color={"whitesmoke"}>
@@ -109,19 +116,28 @@ const FristTemplate = () => {
         </Box>
         <Box w={"15rem"} className={Skill_Component__container}>
           <Box mb={"12px"} className={Skill_Component__skills_heading}>
-            <Heading2
+            <Heading3
               width={"15rem"}
               alignment={"start"}
-              color={theme.colors.custom.heading1.light}
+              color={theme.colors.custom.heading3.light}
             >
               Skills
-            </Heading2>
+            </Heading3>
           </Box>
           {firstTemplateData.skills.map((item, key) => {
             return (
               <Box
-                w={"15rem"}
+                w={"auto"}
                 mb={"24px"}
+                style={{
+                  border: `${
+                    item.groupTitle === "Skill Group Title"
+                      ? ""
+                      : item.groupTitle === ""
+                      ? ""
+                      : `2px solid ${theme.colors.custom.dark}`
+                  }`,
+                }}
                 pb={
                   item.groupTitle === "Skill Group Title"
                     ? ""
@@ -129,12 +145,19 @@ const FristTemplate = () => {
                     ? ""
                     : "20px"
                 }
-                bg={
+                ml={
                   item.groupTitle === "Skill Group Title"
                     ? ""
                     : item.groupTitle === ""
                     ? ""
-                    : theme.colors.custom.darker
+                    : "5px"
+                }
+                mr={
+                  item.groupTitle === "Skill Group Title"
+                    ? ""
+                    : item.groupTitle === ""
+                    ? ""
+                    : "5px"
                 }
               >
                 <Box
@@ -144,6 +167,13 @@ const FristTemplate = () => {
                       : item.groupTitle === ""
                       ? "0"
                       : "25px"
+                  }
+                  mb={
+                    item.groupTitle === "Skill Group Title"
+                      ? "0"
+                      : item.groupTitle === ""
+                      ? "0"
+                      : "10px"
                   }
                   w={
                     item.groupTitle === "Skill Group Title"
@@ -161,17 +191,17 @@ const FristTemplate = () => {
                   }
                   className={Skill_Component__skill_heading}
                 >
-                  <Heading6
+                  <Heading5
                     width={"15rem"}
                     alignment={"start"}
-                    color={theme.colors.custom.heading1.light}
+                    color={theme.colors.custom.heading3.light}
                   >
                     {item.groupTitle === "Skill Group Title"
                       ? ""
                       : item.groupTitle === ""
                       ? ""
                       : item.groupTitle}
-                  </Heading6>
+                  </Heading5>
                 </Box>
                 <Box w={"15rem"}>
                   {item.skills.map((skill, key) => {
@@ -206,6 +236,7 @@ const FristTemplate = () => {
                             radius={"lg"}
                             color={skill.levelColor}
                             value={skill.level}
+                            fz={"0.7rem"}
                             marks={[
                               { value: 20, label: beginner },
                               { value: 40, label: skillFull },

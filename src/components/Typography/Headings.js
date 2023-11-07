@@ -1,7 +1,7 @@
 import { Title } from "@mantine/core";
 import React from "react";
 
-const Heading1 = ({ children, color, alignment, width, className }) => {
+const Heading1 = ({ children, color, alignment, width, className, fw }) => {
   return (
     <Title
       order={1}
@@ -9,13 +9,14 @@ const Heading1 = ({ children, color, alignment, width, className }) => {
       className={className}
       align={alignment ? alignment : "start"}
       color={color}
+      fw={fw}
     >
       {children}
     </Title>
   );
 };
 
-const Heading2 = ({ children, color, alignment, width, className }) => {
+const Heading2 = ({ children, color, alignment, width, className, fw }) => {
   return (
     <Title
       order={2}
@@ -23,13 +24,14 @@ const Heading2 = ({ children, color, alignment, width, className }) => {
       className={className}
       align={alignment ? alignment : "start"}
       color={color}
+      fw={fw}
     >
       {children}
     </Title>
   );
 };
 
-const Heading3 = ({ children, color, alignment, width, className }) => {
+const Heading3 = ({ children, color, alignment, width, className, fw }) => {
   return (
     <Title
       order={3}
@@ -37,39 +39,42 @@ const Heading3 = ({ children, color, alignment, width, className }) => {
       className={className}
       align={alignment ? alignment : "start"}
       color={color}
+      fw={fw}
     >
       {children}
     </Title>
   );
 };
 
-const Heading4 = ({ children, color, alignment, width }) => {
+const Heading4 = ({ children, color, alignment, width, fw }) => {
   return (
     <Title
       order={4}
       w={width}
       align={alignment ? alignment : "start"}
       color={color}
+      fw={fw}
     >
       {children}
     </Title>
   );
 };
 
-const Heading5 = ({ children, color, alignment, width }) => {
+const Heading5 = ({ children, color, alignment, width, fw }) => {
   return (
     <Title
       order={5}
       w={width}
       align={alignment ? alignment : "start"}
       color={color}
+      fw={fw}
     >
       {children}
     </Title>
   );
 };
 
-const Heading6 = ({ children, color, alignment, width, className }) => {
+const Heading6 = ({ children, color, alignment, width, className, fw }) => {
   return (
     <Title
       order={6}
@@ -77,6 +82,7 @@ const Heading6 = ({ children, color, alignment, width, className }) => {
       align={alignment ? alignment : "start"}
       color={color}
       className={className}
+      fw={fw}
     >
       {children}
     </Title>

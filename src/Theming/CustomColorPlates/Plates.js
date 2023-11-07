@@ -1,55 +1,103 @@
 export const colorPlates = {
   blue: {
     first: {
-      light: "#597FD4",
-      lighter: "#AABEE9",
-      lightGreyishBlue: "#1d1e206b",
-      normal: "#294D9E",
-      dark: "#224083",
-      darker: "#14264D",
+      light: "#d3cf94",
+      lighter: "#bdb75e",
+      normal: "#A79F28",
+      dark: "#545014",
+      darker: "#7d771e",
       heading1: {
-        light: "#59A9D4",
-        lighter: "#8FC5E2",
-        normal: "#226183",
-        dark: "#1B4D68",
-        darker: "#14394D",
+        light: "#edecd4",
+        lighter: "#dcd9a9",
+        normal: "#A79F28",
+        dark: "#212008",
+        darker: "#434010",
       },
       heading2: {
-        light: "#59A9D4",
-        lighter: "#8FC5E2",
-        normal: "#226183",
-        dark: "#1B4D68",
-        darker: "#14394D",
+        light: "#edecd4",
+        lighter: "#dcd9a9",
+        normal: "#A79F28",
+        dark: "#212008",
+        darker: "#434010",
       },
       heading3: {
-        light: "#59A9D4",
-        lighter: "#8FC5E2",
-        normal: "#226183",
-        dark: "#1B4D68",
-        darker: "#14394D",
+        light: "#edecd4",
+        lighter: "#dcd9a9",
+        normal: "#A79F28",
+        dark: "#212008",
+        darker: "#434010",
       },
       heading4: {
-        light: "#59A9D4",
-        lighter: "#8FC5E2",
-        normal: "#226183",
-        dark: "#1B4D68",
-        darker: "#14394D",
+        light: "#edecd4",
+        lighter: "#dcd9a9",
+        normal: "#A79F28",
+        dark: "#212008",
+        darker: "#434010",
       },
       heading5: {
-        light: "#59A9D4",
-        lighter: "#8FC5E2",
-        normal: "#226183",
-        dark: "#1B4D68",
-        darker: "#14394D",
+        light: "#edecd4",
+        lighter: "#dcd9a9",
+        normal: "#A79F28",
+        dark: "#212008",
+        darker: "#434010",
       },
       heading6: {
-        light: "#59A9D4",
-        lighter: "#8FC5E2",
-        normal: "#226183",
-        dark: "#1B4D68",
-        darker: "#14394D",
+        light: "#edecd4",
+        lighter: "#dcd9a9",
+        normal: "#A79F28",
+        dark: "#212008",
+        darker: "#434010",
       },
     },
+    // {
+    //   light: "#3a5dab", // Contact and Skill box color
+    //   lighter: "",
+    //   normal: "#294D9E",
+    //   dark: "#294D9E", // border color of group skill box
+    //   darker: "",
+    //   heading1: {
+    //     light: "#abe2ff", // Name color
+    //     lighter: "#f0f0f0", // Profession Text color
+    //     normal: "#226183",
+    //     dark: "",
+    //     darker: "",
+    //   },
+    //   heading2: {
+    //     light: "",
+    //     lighter: "",
+    //     normal: "#226183",
+    //     dark: "",
+    //     darker: "",
+    //   },
+    //   heading3: {
+    //     light: "#e1defe", // contact and Skill and group Title heading color
+    //     lighter: "",
+    //     normal: "#226183",
+    //     dark: "",
+    //     darker: "",
+    //   },
+    //   heading4: {
+    //     light: "",
+    //     lighter: "",
+    //     normal: "#226183",
+    //     dark: "",
+    //     darker: "",
+    //   },
+    //   heading5: {
+    //     light: "",
+    //     lighter: "",
+    //     normal: "#226183",
+    //     dark: "",
+    //     darker: "#14394D",
+    //   },
+    //   heading6: {
+    //     light: "#59A9D4",
+    //     lighter: "#8FC5E2",
+    //     normal: "#226183",
+    //     dark: "",
+    //     darker: "",
+    //   },
+    // },
     second: {
       light: "#BCCBE7",
       lighter: "#D5DFF0",
@@ -300,7 +348,4 @@ export const colorPlates = {
   },
 };
 
-
-export const colorPateNames = [
-  "blue", "yellow"
-]
+export const colorPateNames = ["blue", "yellow"];
