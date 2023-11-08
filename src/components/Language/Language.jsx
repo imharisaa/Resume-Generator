@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addLanguageSkill,
   addWebSiteAndSocialLinks,
+  deleteLanguageSkill,
   deleteWebSiteAndSocialLinks,
   updateLanguageSkill,
   updateWebSiteAndSocialLinks,
@@ -77,7 +78,7 @@ const Language = () => {
                               w={"10px"}
                               radius={"md"}
                               onClick={() => {
-                                dispatch(deleteWebSiteAndSocialLinks(key));
+                                dispatch(deleteLanguageSkill(key));
                               }}
                             >
                               <IconTrash size={"1.5rem"} />
