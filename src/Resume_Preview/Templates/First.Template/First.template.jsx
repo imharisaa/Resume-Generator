@@ -222,7 +222,72 @@ const FristTemplate = () => {
             );
           })}
         </Box>
+        <Box w={"inherit"} className={Skill_Component__container}>
+          {!firstTemplateData.languageSkills.length ? (
+            ""
+          ) : (
+            <Box mb={"12px"} className={Skill_Component__skills_heading}>
+              <Heading2
+                width={"inherit"}
+                alignment={"start"}
+                color={theme.colors.custom.heading1.light}
+              >
+                Language Skill
+              </Heading2>
+            </Box>
+          )}
+          {firstTemplateData.languageSkills.map((item, key) => {
+            let languageBeginner = "";
+            let languageSkillFull = "";
+            let languageExperienced = "";
+            let languageAdvance = "";
+
+            if (item.level <= 20) {
+              languageBeginner = "Beginner";
+            } else if (item.level <= 40) {
+              languageSkillFull = "Skillfull";
+            } else if (item.level <= 70) {
+              languageExperienced = "Experienced";
+            } else if (item.level <= 100) {
+              languageAdvance = "Advance";
+            }
+
+            return (
+              <Box w={"inherit"} mb={6} pb={6}>
+                <Box w={"inherit"} p={"12px"}>
+                  <Box className={Skill_Component__content_container}>
+                    <Heading6
+                      width={"inherit"}
+                      alignment={"start"}
+                      color={"whitesmoke"}
+                    >
+                      {item.title}
+                    </Heading6>
+                    {item.level === 0 ? (
+                      ""
+                    ) : (
+                      <Slider
+                        size={"md"}
+                        w={"100%"}
+                        radius={"lg"}
+                        color={item.levelColor}
+                        value={item.level}
+                        marks={[
+                          { value: 20, label: languageBeginner },
+                          { value: 40, label: languageSkillFull },
+                          { value: 70, label: languageExperienced },
+                          { value: 100, label: languageAdvance },
+                        ]}
+                      />
+                    )}
+                  </Box>
+                </Box>
+              </Box>
+            );
+          })}
+        </Box>
       </Box>
+
       <Box p={"12px"} className={First_Template__col_2}>
         <Flex direction={"column"}>
           <Box w={"100%"} p={"24px"}>

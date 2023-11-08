@@ -197,13 +197,13 @@ const formsSlice = createSlice({
     },
 
     updateLanguageSkill(state, data) {
-      state.languageSkills[data.payload.key].level = data.payload.level
-      state.languageSkills[data.payload.key].levelColor = data.payload.levelColor
-      state.languageSkills[data.payload.key].title = data.payload.title
+      state.languageSkills[data.payload.key].title = data.payload.title;
+      state.languageSkills[data.payload.key].level = data.payload.level;
+      state.languageSkills[data.payload.key].levelColor = data.payload.levelColor;
     },
 
     deleteLanguageSkill(state, data) {
-
+      state.languageSkills.splice(data.payload, 1)
     }
   },
 
