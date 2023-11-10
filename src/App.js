@@ -9,6 +9,7 @@ import { colorPlates } from "./Theming/CustomColorPlates/Plates";
 import Payment from "./Pages/Payment/Payment";
 import Success from "./Pages/Success/Success";
 import Cancel from "./Pages/Cancel/Cancel";
+import CanadianResume from "./Pages/Resume/CanadianResume";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route exact path="/payment" element={<Payment />} />
             <Route exact path="/" element={<Home />} />
             <Route exact path="/resume" element={<Resume />} />
+            <Route exact path="/canadian-resume" element={<CanadianResume />} />
             <Route exact path="/success" element={<Success />} />
             <Route exact path="/cancel" element={<Cancel />} />
           </Routes>

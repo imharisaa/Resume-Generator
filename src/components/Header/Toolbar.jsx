@@ -15,11 +15,14 @@ const Toolbar = () => {
               </Flex>
             </Box>
             <Box w={'67rem'} h={'100%'} >
-              <Flex w={'100%'} h={'100%'} justify={'flex-end'} align={'center'} >
+              <Flex w={'100%'} h={'100%'} gap={15} justify={'flex-end'} align={'center'} >
                 <ActionIcon component="a" href="/resume" variant="gradient" w={'10rem'} h={'35px'} >
                     <Title order={5} >Create Resume</Title>
                 </ActionIcon>
-                <ActionIcon ml={12} component="a" href="/payment" variant="gradient" w={'10rem'} h={'35px'} >
+                <ActionIcon component="a" href="/canadian-resume" variant="gradient" w={'15rem'} h={'35px'} >
+                    <Title order={5} >Create Canadian Resume</Title>
+                </ActionIcon>
+                <ActionIcon component="a" href="/payment" variant="gradient" w={'10rem'} h={'35px'} >
                     <Title order={5} >Buy me a Coffee</Title>
                 </ActionIcon>
               </Flex>
