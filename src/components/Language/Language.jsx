@@ -18,11 +18,8 @@ import { IconCubePlus, IconTrash } from "@tabler/icons-react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addLanguageSkill,
-  addWebSiteAndSocialLinks,
   deleteLanguageSkill,
-  deleteWebSiteAndSocialLinks,
-  updateLanguageSkill,
-  updateWebSiteAndSocialLinks,
+  updateLanguageSkill
 } from "../../store/forms.reducer";
 
 const Language = () => {

@@ -32,6 +32,8 @@ const FristTemplate = () => {
 
   const theme = useMantineTheme();
 
+  console.log(firstTemplateData.templateType)
+
   return (
     <Box
       className={First_Template__container}

@@ -10,11 +10,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import {
-  IconEye,
-  IconFileDownload,
-  IconFileUpload
-} from "@tabler/icons-react";
+import { IconEye, IconFileDownload, IconFileUpload } from "@tabler/icons-react";
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { templateMaper, uploadCVData } from "../../../store/forms.reducer";
@@ -23,13 +19,13 @@ import ChangeTemplatesModalHeader from "./Templates_Modal/ChangeTemplateModalHea
 import ChangeTemplateModalLeftSection from "./Templates_Modal/ChangeTemplateModalLeftSection";
 import ChangeTemplateModalRightSection from "./Templates_Modal/ChangeTemplateModalRightSection";
 
-
+import CryptoJS from "crypto-js";
 
 const RightSection = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const colorPlate = useSelector((state) => state.theme.currentPlate);
   const cvData = useSelector((state) => state.forms);
-  const Template = templateMaper[cvData.template]
+  const Template = templateMaper[cvData.template];
   const {
     classes: {
       right_section_container,
@@ -42,18 +38,21 @@ const RightSection = () => {
   const uploadCVJsonFile = useRef();
 
   const dispatch = useDispatch();
-
+  const encryptionKey = "99a2f367dcdcd4d89b38455c57a63baa4701267a40629ae67c152ae246b046c0";
+  
   const downloadData = () => {
     // Convert the data to JSON
-    const jsonData = JSON.stringify(cvData, null, 2);
+    const jsonData = JSON.stringify(cvData);
 
+
+    const encrypted = CryptoJS.AES.encrypt(jsonData, encryptionKey).toString();
     // Create a Blob with the JSON data
-    const blob = new Blob([jsonData], { type: "application/json" });
+    const blob = new Blob([encrypted], { type: "application/json" });
 
     // Create a link element to trigger the download
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "CV-Data.json";
+    link.download = "Data.json";
     link.click();
 
     // Clean up the URL created for the download
@@ -62,14 +61,21 @@ const RightSection = () => {
 
   const UploadData = (event) => {
     debugger;
+
     const file = event.target.files[0];
+
     if (file) {
       const reader = new FileReader();
 
       reader.onload = (e) => {
         try {
-          const jsonData = JSON.parse(e.target.result);
-          dispatch(uploadCVData(jsonData));
+          const encryptedData = e.target.result
+          const decrypted = CryptoJS.AES.decrypt(
+            encryptedData,
+            encryptionKey
+          ).toString(CryptoJS.enc.Utf8);
+          const decryptedJSON = JSON.parse(decrypted);
+          dispatch(uploadCVData(decryptedJSON));
         } catch (error) {
           console.error("Error parsing JSON file:", error);
         }

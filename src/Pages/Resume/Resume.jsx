@@ -1,12 +1,15 @@
 import { ActionIcon, Box, Button, Paper, Text } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useResumeStyles } from "./Resume.style";
 import LeftSection from "../Resume/LeftSection/LeftSection";
 import RightSection from "./RightSection/RightSection";
 import { IconArrowBigRightLines } from "@tabler/icons-react";
+import { useDispatch } from "react-redux";
+import { changeTemplateType } from "../../store/forms.reducer";
 
 const Resume = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const dispatch = useDispatch()
   const {
     classes: {
       left_section,
@@ -22,6 +25,13 @@ const Resume = () => {
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
+
+  const templateStyle = localStorage.getItem('templateStyle')
+
+  useEffect(() => {
+    console.log("On Console: ", templateStyle)
+    dispatch(changeTemplateType(templateStyle))
+  }, [templateStyle])
 
   return (
     <Box className={resume_container}>

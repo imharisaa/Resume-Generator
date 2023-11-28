@@ -3,12 +3,14 @@ import FristTemplate from "../Resume_Preview/Templates/First.Template/First.temp
 import SecondTemplate from "../Resume_Preview/Second.Template/Second.template";
 import ThirdTemplate from "../Resume_Preview/Templates/third-Template/Third.template";
 import ForthTemplate from "../Resume_Preview/Templates/forth-Template/Forth.template";
+import CanadianFirstTemplate from "../Resume_Preview/Templates/Canadian.First.Template/Canadian.First.Template";
 
 export const templateMaper = {
   "FristTemplate": FristTemplate,
   "SecondTemplate": SecondTemplate,
   "ThirdTemplate": ThirdTemplate,
-  "ForthTemplate": ForthTemplate
+  "ForthTemplate": ForthTemplate,
+  "CanadianFirstTemplate": CanadianFirstTemplate
 }
 
 export const templates = [
@@ -18,11 +20,43 @@ export const templates = [
   "ForthTemplate",
 ];
 
+export const canadianTemplates = [
+  "CanadianFirstTemplate"
+];
+
+export const bothTemplate = [
+  "FristTemplate",
+  "SecondTemplate",
+  "ThirdTemplate",
+  "ForthTemplate",
+  "CanadianFirstTemplate"
+];
+
+
+
+const templateStyle = localStorage.getItem("templateStyle")
+
+const templateStyleChecker = () => {
+  let result = ""
+
+  if (templateStyle === "NormalTemplate") {
+    result = "FristTemplate"
+  } else if (templateStyle === "CanadianTemplate") {
+    result = "CanadianFirstTemplate"
+  } else if (templateStyle === "BothTemplate") {
+    result = "ThirdTemplate"
+  }
+
+  return result
+
+}
+
 const formsSlice = createSlice({
   name: "forms",
   initialState: {
-    template: "FristTemplate",
-    previewTemplate: "FristTemplate",
+    templateType: "All",
+    template: templateStyleChecker(),
+    previewTemplate: templateStyleChecker(),
     personal_details: {
       wantedJobTitle: "",
       pfpUri: "",
@@ -204,7 +238,16 @@ const formsSlice = createSlice({
 
     deleteLanguageSkill(state, data) {
       state.languageSkills.splice(data.payload, 1)
+    },
+
+    //? Set Template Type Reducer
+
+    changeTemplateType(state, data) {
+      debugger
+      state.templateType = data.payload
+      debugger
     }
+
   },
 
 
@@ -235,6 +278,10 @@ export const {
   changeTemplate,
   addLanguageSkill,
   deleteLanguageSkill,
-  updateLanguageSkill
+  updateLanguageSkill,
+  changeTemplateType
 } = formsSlice.actions;
 export default formsSlice.reducer;
+
+
+//Hyouka
