@@ -1,0 +1,35 @@
+
+.payment-page {
+    background-image: url("../../assets/buymeacoffeepagebg.png");
+    background-repeat: no-repeat;
+    background-origin: center;
+    background-size: cover;
+}
+
+.card-container {
+    border-radius: 20px;
+    background-image: url('../../assets/buymeacoffeebg.png');
+    background-repeat: no-repeat;
+    background-size: 24rem;
+}
+
+.avatar-image {
+    background-image: url("../../assets/bmcbrand/bmclogoyellow.png");
+    width: 7rem;
+    height: 7rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    position: relative;
+    top: 6rem;
+}
+
+.qrcode {
+    width: 8rem;
+    height: 8rem;
+    background-image: url('../../assets/bmc_qr.png');
+    position: relative;
+    top: 10rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

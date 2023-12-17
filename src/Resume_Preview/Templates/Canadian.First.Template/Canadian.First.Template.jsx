@@ -102,7 +102,7 @@ const CanadianFirstTemplate = () => {
                   italic
                   fw={"bolder"}
                 >
-                  Professional Summery
+                  PROFESSIONAL SUMMERY
                 </Text>
               </Box>
 
@@ -130,7 +130,7 @@ const CanadianFirstTemplate = () => {
                   italic
                   fw={"bolder"}
                 >
-                  Skills
+                  SKILLS
                 </Text>
               </Box>
 
@@ -192,11 +192,7 @@ const CanadianFirstTemplate = () => {
                                 className={Skill_Component__content_container}
                                 w={"fit-content"}
                               >
-                                <Text
-                                  alignment={"start"}
-                                  italic
-                                  color={"gray"}
-                                >
+                                <Text alignment={"start"} italic color={"gray"}>
                                   <li>{skill.skill}</li>
                                 </Text>
                               </Box>
@@ -205,7 +201,6 @@ const CanadianFirstTemplate = () => {
                         })}
                       </Flex>
                     </Box>
-
                   </Box>
                 );
               })}
@@ -216,8 +211,131 @@ const CanadianFirstTemplate = () => {
           {/* //? Work History Start From Here */}
 
           <Box p={12} w={"100%"}>
+            <Flex direction={"column"} w={"100%"} h={"100%"}>
+              <Box pl={12} w={"100%"} bg={"whitesmoke"} h={"100%"}>
+                <Text
+                  color={theme.colors.custom.heading1.light}
+                  italic
+                  fw={"bolder"}
+                >
+                  EXPERIENCE
+                </Text>
+              </Box>
 
+              {canadianFirstTemplateData.employmentHistory.map((item) => (
+                <Box w={"100%"} pt={12}>
+                  <Flex w={"100%"} justify={"space-between"}>
+                    <Box w={"49%"}>
+                      <Flex w={"100%"} direction={"column"}>
+                        <Text italic fz={15} fw={"bold"}>
+                          {item.jobTitle}
+                        </Text>
+                        <Text italic fz={15} fw={"bold"}>
+                          {item.employer}
+                          {item.city === "" ? "" : ` | ${item.city}`}
+                        </Text>
+                      </Flex>
+                    </Box>
+                    <Box pr={12} w={"49%"}>
+                      <Flex w={"100%"} align={"center"} justify={"flex-end"}>
+                        <Text>{`${item.startDate} - ${item.endDate}`}</Text>
+                      </Flex>
+                    </Box>
+                  </Flex>
+                  <Box w={"100%"} pl={15} pt={6}>
+                    <div
+                      style={{
+                        fontStyle: "italic",
+                        color: "lightslategray",
+                      }}
+                      dangerouslySetInnerHTML={{
+                        __html: `${item.details}`,
+                      }}
+                    />
+                  </Box>
+                </Box>
+              ))}
+            </Flex>
           </Box>
+          {/* //! Work History End Here */}
+          {/* //? Education Start From Here */}
+
+          <Box p={12} w={"100%"}>
+            <Flex direction={"column"} w={"100%"} h={"100%"}>
+              <Box pl={12} w={"100%"} bg={"whitesmoke"} h={"100%"}>
+                <Text
+                  color={theme.colors.custom.heading1.light}
+                  italic
+                  fw={"bolder"}
+                >
+                  EDUCATION
+                </Text>
+              </Box>
+            </Flex>
+          </Box>
+
+          {canadianFirstTemplateData.education.map((item) => (
+            <Box w={"100%"} pl={12}>
+              <Flex w={"100%"} justify={"space-between"}>
+                <Box w={"49%"}>
+                  <Flex w={"100%"} direction={"column"}>
+                    <Box w={"100%"}>
+                      <Text italic fz={15} fw={"bold"}>
+                        {item.degree}
+                      </Text>
+                    </Box>
+                    <Box w={"100%"}>
+                      <Text italic fz={15} fw={"bold"}>
+                        {item.school}
+                        {item.city === "" ? "" : `, ${item.city}`}
+                      </Text>
+                    </Box>
+                  </Flex>
+                </Box>
+                <Box pr={12} w={"49%"}>
+                  <Flex w={"100%"} justify={"flex-end"}>
+                    <Text>{item.endDate}</Text>
+                  </Flex>
+                </Box>
+              </Flex>
+              <Box w={"100%"} pl={15} pt={6}>
+                <div
+                  style={{
+                    fontStyle: "italic",
+                    color: "lightslategray",
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: `${item.details}`,
+                  }}
+                />
+              </Box>
+            </Box>
+          ))}
+
+          {/* //! Education End Here */}
+          {/* //? Language Skill From Here */}
+
+          <Box p={12} w={"100%"}>
+            <Flex direction={"column"} w={"100%"} h={"100%"}>
+              <Box pl={12} w={"100%"} bg={"whitesmoke"} h={"100%"}>
+                <Text
+                  color={theme.colors.custom.heading1.light}
+                  italic
+                  fw={"bolder"}
+                >
+                  LANGUAGE
+                </Text>
+              </Box>
+            </Flex>
+          </Box>
+
+          {
+            canadianFirstTemplateData.languageSkills.map((item) => (
+              <Box w={'100%'} pl={12} >
+                  
+              </Box>
+            ))
+          }
 
         </Flex>
       </Container>
