@@ -62,12 +62,13 @@ const Payment = () => {
                 style={{
                   position: "relative",
                   top: "8rem",
-                  backgroundColor: "#fadd03",
                 }}
                 w={"85%"}
                 h={50}
                 variant="filled"
                 onClick={buyMeACoffee}
+                bg={'#fadd03'}
+                disabled
                 
               >
                 <Title order={5} color="black">

@@ -44,7 +44,7 @@ const templateStyleChecker = () => {
   } else if (templateStyle === "CanadianTemplate") {
     result = "CanadianFirstTemplate"
   } else if (templateStyle === "BothTemplate") {
-    result = "ThirdTemplate"
+    result = "FristTemplate"
   }
 
   return result
@@ -55,6 +55,7 @@ const formsSlice = createSlice({
   name: "forms",
   initialState: {
     templateType: "All",
+    perviewMode: false,
     template: templateStyleChecker(),
     previewTemplate: templateStyleChecker(),
     personal_details: {
@@ -207,7 +208,6 @@ const formsSlice = createSlice({
     },
 
     uploadCVData(state, data) {
-      debugger
       state.education = data.payload.education
       state.employmentHistory = data.payload.employmentHistory
       state.personal_details = data.payload.personal_details
@@ -243,9 +243,12 @@ const formsSlice = createSlice({
     //? Set Template Type Reducer
 
     changeTemplateType(state, data) {
-      debugger
       state.templateType = data.payload
+    },
+
+    changePreviewMode(state, data) {
       debugger
+      state.perviewMode = data.payload
     }
 
   },
@@ -279,7 +282,8 @@ export const {
   addLanguageSkill,
   deleteLanguageSkill,
   updateLanguageSkill,
-  changeTemplateType
+  changeTemplateType,
+  changePreviewMode
 } = formsSlice.actions;
 export default formsSlice.reducer;
 

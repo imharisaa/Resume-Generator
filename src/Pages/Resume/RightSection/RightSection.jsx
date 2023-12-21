@@ -13,7 +13,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconEye, IconFileDownload, IconFileUpload } from "@tabler/icons-react";
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { templateMaper, uploadCVData } from "../../../store/forms.reducer";
+import { changePreviewMode, templateMaper, uploadCVData } from "../../../store/forms.reducer";
 import useRightSectionStyle from "./RightSection.style";
 import ChangeTemplatesModalHeader from "./Templates_Modal/ChangeTemplateModalHeader";
 import ChangeTemplateModalLeftSection from "./Templates_Modal/ChangeTemplateModalLeftSection";
@@ -40,42 +40,78 @@ const RightSection = () => {
   const dispatch = useDispatch();
   const encryptionKey = "99a2f367dcdcd4d89b38455c57a63baa4701267a40629ae67c152ae246b046c0";
   
+  // const downloadData = () => {
+  //   // Convert the data to JSON
+  //   const jsonData = JSON.stringify(cvData);
+
+
+  //   const encrypted = CryptoJS.AES.encrypt(jsonData, encryptionKey).toString();
+  //   // Create a Blob with the JSON data
+  //   const blob = new Blob([encrypted], { type: "application/json" });
+
+  //   // Create a link element to trigger the download
+  //   const link = document.createElement("a");
+  //   link.href = URL.createObjectURL(blob);
+  //   link.download = "Data.json";
+  //   link.click();
+
+  //   // Clean up the URL created for the download
+  //   URL.revokeObjectURL(link.href);
+  // };
+
   const downloadData = () => {
     // Convert the data to JSON
-    const jsonData = JSON.stringify(cvData);
+    const jsonData = JSON.stringify(cvData, null, 2);
 
-
-    const encrypted = CryptoJS.AES.encrypt(jsonData, encryptionKey).toString();
     // Create a Blob with the JSON data
-    const blob = new Blob([encrypted], { type: "application/json" });
+    const blob = new Blob([jsonData], { type: "application/json" });
 
     // Create a link element to trigger the download
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "Data.json";
+    link.download = "CV-Data.json";
     link.click();
 
     // Clean up the URL created for the download
     URL.revokeObjectURL(link.href);
   };
 
+  // const UploadData = (event) => {
+  //   debugger;
+
+  //   const file = event.target.files[0];
+
+  //   if (file) {
+  //     const reader = new FileReader();
+
+  //     reader.onload = (e) => {
+  //       try {
+  //         const encryptedData = e.target.result
+  //         const decrypted = CryptoJS.AES.decrypt(
+  //           encryptedData,
+  //           encryptionKey
+  //         ).toString(CryptoJS.enc.Utf8);
+  //         const decryptedJSON = JSON.parse(decrypted);
+  //         dispatch(uploadCVData(decryptedJSON));
+  //       } catch (error) {
+  //         console.error("Error parsing JSON file:", error);
+  //       }
+  //     };
+
+  //     reader.readAsText(file);
+  //   }
+  // };
+
   const UploadData = (event) => {
     debugger;
-
     const file = event.target.files[0];
-
     if (file) {
       const reader = new FileReader();
 
       reader.onload = (e) => {
         try {
-          const encryptedData = e.target.result
-          const decrypted = CryptoJS.AES.decrypt(
-            encryptedData,
-            encryptionKey
-          ).toString(CryptoJS.enc.Utf8);
-          const decryptedJSON = JSON.parse(decrypted);
-          dispatch(uploadCVData(decryptedJSON));
+          const jsonData = JSON.parse(e.target.result);
+          dispatch(uploadCVData(jsonData));
         } catch (error) {
           console.error("Error parsing JSON file:", error);
         }
@@ -109,7 +145,11 @@ const RightSection = () => {
                   variant="gradient"
                   title="Select Templates"
                   mr={12}
-                  onClick={open}
+                  onClick={() => {
+                  debugger
+                    open()
+                    dispatch(changePreviewMode(true))
+                  }}
                 >
                   <IconEye />
                 </ActionIcon>
@@ -144,7 +184,8 @@ const RightSection = () => {
 
                 <Modal
                   centered
-                  size={"100rem"}
+                  // size={"xl"}
+                  fullScreen
                   withCloseButton={false}
                   transitionProps={{
                     transition: "fade",
@@ -155,14 +196,28 @@ const RightSection = () => {
                   onClose={close}
                 >
                   <Flex w={"100%"} direction={"column"}>
-                    <Box bg={"white"} h={"100%"}>
-                      <ChangeTemplatesModalHeader close={close} />
+                    <Box bg={"white"} h={"50px"}>
+                      <ChangeTemplatesModalHeader close={() => {
+                    dispatch(changePreviewMode(false))
+                    close()
+                  }} />
                     </Box>
                     <Flex w={"100%"}>
-                      <Box w={"50%"}>
+                      <Box w={"50%"} style={{
+                        position: 'relative',
+                        overflowY: 'auto'
+                      }}>
                         <ChangeTemplateModalLeftSection />
                       </Box>
-                      <Box w={"50%"}>
+                      <Box w={"50%"} style={{
+                          padding: "8px 20px 0px 20px",
+                          display: 'flex',
+                          justifyContent: 'center',
+                          justifyContent: 'space-around',
+                          maxHeight: "calc( 100vh - 60px )",
+                          overflowY: 'auto',
+                          overflowX: 'hidden'
+                      }}>
                         <ChangeTemplateModalRightSection />
                       </Box>
                     </Flex>

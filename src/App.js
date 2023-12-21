@@ -9,8 +9,15 @@ import { colorPlates } from "./Theming/CustomColorPlates/Plates";
 import Payment from "./Pages/Payment/Payment";
 import Success from "./Pages/Success/Success";
 import Cancel from "./Pages/Cancel/Cancel";
+import { useEffect } from "react";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize('G-J11X1KZSV8');
 
 function App() {
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search, title: "Home Page" });
+  }, []);
   return (
     <div className="App">
 

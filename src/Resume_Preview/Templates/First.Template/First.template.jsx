@@ -36,9 +36,14 @@ const FristTemplate = () => {
 
   return (
     <Box
+      style={{
+        overflowY: firstTemplateData.perviewMode ? "auto" : "hidden",
+        overflowX: 'hidden'
+      }}
       className={First_Template__container}
       bg={"whitesmoke"}
-      h={"297mm"}
+      mah={"fit-content"}
+      mih={"297mm"}
       w={"210mm"}
     >
       <Box className={First_Template__col_1}>

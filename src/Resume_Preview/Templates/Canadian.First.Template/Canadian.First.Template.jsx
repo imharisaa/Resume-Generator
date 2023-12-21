@@ -32,7 +32,7 @@ const CanadianFirstTemplate = () => {
   const { classes } = useCanadianFirstTemplateStyles();
   return (
     <>
-      <Container className={classes.page} h={"297mm"} w={"210mm"}>
+      <Container className={classes.page} mih={"297mm"} w={"210mm"}>
         <Flex direction={"column"} w={"100%"} h={"100%"}>
           {/* //? Header of the Resume Starts from here */}
           <Box p={12} h={"10rem"} w={"100%"}>

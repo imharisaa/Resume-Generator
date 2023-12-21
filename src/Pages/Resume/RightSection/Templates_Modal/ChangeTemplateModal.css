@@ -1,0 +1,12 @@
+.previewCard {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  width: inherit;
+  justify-content: center;
+}
+
+.previewCard > :last-child {
+  margin-right: auto;
+  left: 2%;
+}
