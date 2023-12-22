@@ -18,7 +18,7 @@ import {
   Heading6,
 } from "../../../components/Typography/Headings";
 
-const CanadianFirstTemplate = () => {
+const CanadianFirstTemplate = ({pdfRef, divId}) => {
   const theme = useMantineTheme();
   const canadianFirstTemplateData = useSelector((state) => state.forms);
   const {
@@ -32,7 +32,7 @@ const CanadianFirstTemplate = () => {
   const { classes } = useCanadianFirstTemplateStyles();
   return (
     <>
-      <Container className={classes.page} mih={"297mm"} w={"210mm"}>
+      <Container className={classes.page} mih={"297mm"} w={"210mm"} ref={pdfRef} id={divId}>
         <Flex direction={"column"} w={"100%"} h={"100%"}>
           {/* //? Header of the Resume Starts from here */}
           <Box p={12} h={"10rem"} w={"100%"}>

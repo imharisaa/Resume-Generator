@@ -9,9 +9,34 @@ import {
   Heading6,
 } from "../../../components/Typography/Headings";
 import { useSelector } from "react-redux";
-
-const FristTemplate = () => {
+import { PDFViewer } from "@react-pdf/renderer";
+const FristTemplate = ({ pdf = false }) => {
   const firstTemplateData = useSelector((state) => state.forms);
+  const tStyle = useFirstTemplateStyle();
+
+  const theme = useMantineTheme();
+
+  console.log(firstTemplateData.templateType);
+  if (!pdf)
+    return (
+      <InnerTemplate
+        firstTemplateData={firstTemplateData}
+        theme={theme}
+        tStyle={tStyle}
+      />
+    );
+  return (
+    <PDFViewer>
+      <InnerTemplate
+        firstTemplateData={firstTemplateData}
+        theme={theme}
+        tStyle={tStyle}
+      />
+    </PDFViewer>
+  );
+};
+const InnerTemplate = ({ theme, tStyle, firstTemplateData }) => {
+  // const firstTemplateData = useSelector((state) => state.forms);
   const {
     classes: {
       First_Template__container,
@@ -28,17 +53,17 @@ const FristTemplate = () => {
       Skill_Component__content_container,
       Work_History_Component__heading_container,
     },
-  } = useFirstTemplateStyle();
+  } = tStyle;
 
-  const theme = useMantineTheme();
+  // const theme = useMantineTheme();
 
-  console.log(firstTemplateData.templateType)
+  console.log(firstTemplateData.templateType);
 
   return (
     <Box
       style={{
         overflowY: firstTemplateData.perviewMode ? "auto" : "hidden",
-        overflowX: 'hidden'
+        overflowX: "hidden",
       }}
       className={First_Template__container}
       bg={"whitesmoke"}

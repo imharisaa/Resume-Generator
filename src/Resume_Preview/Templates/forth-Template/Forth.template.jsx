@@ -49,8 +49,8 @@ const ForthTemplate = () => {
         <Box
           style={{ boxShadow: "0px 0px 6px 5px #7c797954", overflowY: perviewMode ? "auto" : "hidden", overflowX: 'hidden' }}
           bg={"white"}
-          mah={perviewMode ? "297mm" : "fit-content"}
-          mih={perviewMode ? "" : "297mm"}
+          mah={ "fit-content"}
+          mih={"297mm"}
           w={"210mm"}
         >
           <Box p={15} width={"100%"} bg={theme.colors.custom.normal}>

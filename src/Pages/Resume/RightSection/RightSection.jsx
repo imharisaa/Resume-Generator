@@ -13,15 +13,26 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconEye, IconFileDownload, IconFileUpload } from "@tabler/icons-react";
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changePreviewMode, templateMaper, uploadCVData } from "../../../store/forms.reducer";
+import {
+  changePreviewMode,
+  templateMaper,
+  uploadCVData,
+} from "../../../store/forms.reducer";
 import useRightSectionStyle from "./RightSection.style";
 import ChangeTemplatesModalHeader from "./Templates_Modal/ChangeTemplateModalHeader";
 import ChangeTemplateModalLeftSection from "./Templates_Modal/ChangeTemplateModalLeftSection";
 import ChangeTemplateModalRightSection from "./Templates_Modal/ChangeTemplateModalRightSection";
+import { usePDF } from "react-to-pdf";
 
 import CryptoJS from "crypto-js";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { generatePDF, printPage } from "./pdfgenerator";
+import CanadianFirstTemplate from "../../../Resume_Preview/Templates/Canadian.First.Template/Canadian.First.Template";
+
 
 const RightSection = () => {
+  const pdfRef = useRef();
+  const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
   const [opened, { open, close }] = useDisclosure(false);
   const colorPlate = useSelector((state) => state.theme.currentPlate);
   const cvData = useSelector((state) => state.forms);
@@ -38,12 +49,12 @@ const RightSection = () => {
   const uploadCVJsonFile = useRef();
 
   const dispatch = useDispatch();
-  const encryptionKey = "99a2f367dcdcd4d89b38455c57a63baa4701267a40629ae67c152ae246b046c0";
-  
+  const encryptionKey =
+    "99a2f367dcdcd4d89b38455c57a63baa4701267a40629ae67c152ae246b046c0";
+
   // const downloadData = () => {
   //   // Convert the data to JSON
   //   const jsonData = JSON.stringify(cvData);
-
 
   //   const encrypted = CryptoJS.AES.encrypt(jsonData, encryptionKey).toString();
   //   // Create a Blob with the JSON data
@@ -146,9 +157,8 @@ const RightSection = () => {
                   title="Select Templates"
                   mr={12}
                   onClick={() => {
-                  debugger
-                    open()
-                    dispatch(changePreviewMode(true))
+                    open();
+                    dispatch(changePreviewMode(true));
                   }}
                 >
                   <IconEye />
@@ -160,6 +170,26 @@ const RightSection = () => {
                   mr={12}
                   mb={5}
                   onClick={downloadData}
+                >
+                  <IconFileDownload />
+                </ActionIcon>
+
+                <ActionIcon
+                  variant="gradient"
+                  title="Download CV As PDF"
+                  mr={12}
+                  mb={5}
+                  onClick={() => generatePDF(pdfRef)}
+                >
+                  <IconFileDownload />
+                </ActionIcon>
+
+                <ActionIcon
+                  variant="gradient"
+                  title="Download CV As PDF"
+                  mr={12}
+                  mb={5}
+                  onClick={() => printPage('cvPrint')}
                 >
                   <IconFileDownload />
                 </ActionIcon>
@@ -197,27 +227,35 @@ const RightSection = () => {
                 >
                   <Flex w={"100%"} direction={"column"}>
                     <Box bg={"white"} h={"50px"}>
-                      <ChangeTemplatesModalHeader close={() => {
-                    dispatch(changePreviewMode(false))
-                    close()
-                  }} />
+                      <ChangeTemplatesModalHeader
+                        close={() => {
+                          dispatch(changePreviewMode(false));
+                          close();
+                        }}
+                      />
                     </Box>
                     <Flex w={"100%"}>
-                      <Box w={"50%"} style={{
-                        position: 'relative',
-                        overflowY: 'auto'
-                      }}>
+                      <Box
+                        w={"50%"}
+                        style={{
+                          position: "relative",
+                          overflowY: "auto",
+                        }}
+                      >
                         <ChangeTemplateModalLeftSection />
                       </Box>
-                      <Box w={"50%"} style={{
+                      <Box
+                        w={"50%"}
+                        style={{
                           padding: "8px 20px 0px 20px",
-                          display: 'flex',
-                          justifyContent: 'center',
-                          justifyContent: 'space-around',
+                          display: "flex",
+                          justifyContent: "center",
+                          justifyContent: "space-around",
                           maxHeight: "calc( 100vh - 60px )",
-                          overflowY: 'auto',
-                          overflowX: 'hidden'
-                      }}>
+                          overflowY: "auto",
+                          overflowX: "hidden",
+                        }}
+                      >
                         <ChangeTemplateModalRightSection />
                       </Box>
                     </Flex>
@@ -227,9 +265,9 @@ const RightSection = () => {
               <Box className={right_section_container_templates}>
                 <Flex>
                   {/* Template */}
-                  <Box>
+                  <Box >
                     <Template />
-                    {/* <FristTemplate /> */}
+                    {/* <CanadianFirstTemplate pdfRef={pdfRef} divId={'cvPrint'}  /> */}
                   </Box>
                 </Flex>
               </Box>
