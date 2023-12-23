@@ -10,7 +10,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconEye, IconFileDownload, IconFileUpload } from "@tabler/icons-react";
+import { IconEye, IconFileDownload, IconFileTypePdf, IconFileUpload, IconJson } from "@tabler/icons-react";
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -28,6 +28,7 @@ import CryptoJS from "crypto-js";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { generatePDF, printPage } from "./pdfgenerator";
 import CanadianFirstTemplate from "../../../Resume_Preview/Templates/Canadian.First.Template/Canadian.First.Template";
+import FristTemplate from "../../../Resume_Preview/Templates/First.Template/First.template";
 
 
 const RightSection = () => {
@@ -171,17 +172,7 @@ const RightSection = () => {
                   mb={5}
                   onClick={downloadData}
                 >
-                  <IconFileDownload />
-                </ActionIcon>
-
-                <ActionIcon
-                  variant="gradient"
-                  title="Download CV As PDF"
-                  mr={12}
-                  mb={5}
-                  onClick={() => generatePDF(pdfRef)}
-                >
-                  <IconFileDownload />
+                  <IconJson />
                 </ActionIcon>
 
                 <ActionIcon
@@ -191,7 +182,7 @@ const RightSection = () => {
                   mb={5}
                   onClick={() => printPage('cvPrint')}
                 >
-                  <IconFileDownload />
+                  <IconFileTypePdf />
                 </ActionIcon>
 
                 <Input
@@ -266,8 +257,8 @@ const RightSection = () => {
                 <Flex>
                   {/* Template */}
                   <Box >
-                    <Template />
-                    {/* <CanadianFirstTemplate pdfRef={pdfRef} divId={'cvPrint'}  /> */}
+                    {/* <Template pdfRef={pdfRef} /> */}
+                    <FristTemplate pdfRef={pdfRef} divId={'cvPrint'}  />
                   </Box>
                 </Flex>
               </Box>

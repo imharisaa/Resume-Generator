@@ -56,6 +56,7 @@ const formsSlice = createSlice({
   initialState: {
     templateType: "All",
     perviewMode: false,
+    pdf: false,
     template: templateStyleChecker(),
     previewTemplate: templateStyleChecker(),
     personal_details: {
@@ -249,6 +250,10 @@ const formsSlice = createSlice({
     changePreviewMode(state, data) {
       debugger
       state.perviewMode = data.payload
+    },
+
+    changePdfDownloadToggler(state, data) {
+      state.pdf = data.payload 
     }
 
   },
@@ -283,7 +288,8 @@ export const {
   deleteLanguageSkill,
   updateLanguageSkill,
   changeTemplateType,
-  changePreviewMode
+  changePreviewMode,
+  changePdfDownloadToggler
 } = formsSlice.actions;
 export default formsSlice.reducer;
 

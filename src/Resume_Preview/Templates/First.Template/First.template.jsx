@@ -9,33 +9,43 @@ import {
   Heading6,
 } from "../../../components/Typography/Headings";
 import { useSelector } from "react-redux";
-import { PDFViewer } from "@react-pdf/renderer";
-const FristTemplate = ({ pdf = false }) => {
+import { Document, View, Page, PDFDownloadLink } from "@react-pdf/renderer";
+const FristTemplate = ({ pdfRef, divId }) => {
   const firstTemplateData = useSelector((state) => state.forms);
   const tStyle = useFirstTemplateStyle();
 
   const theme = useMantineTheme();
 
   console.log(firstTemplateData.templateType);
-  if (!pdf)
+  if (!firstTemplateData.pdf)
     return (
       <InnerTemplate
         firstTemplateData={firstTemplateData}
         theme={theme}
         tStyle={tStyle}
+        divId={divId}
       />
     );
   return (
-    <PDFViewer>
-      <InnerTemplate
-        firstTemplateData={firstTemplateData}
-        theme={theme}
-        tStyle={tStyle}
-      />
-    </PDFViewer>
+    <div>
+      <PDFDownloadLink
+        document={
+          <InnerTemplate
+            firstTemplateData={firstTemplateData}
+            theme={theme}
+            tStyle={tStyle}
+          />
+        }
+        fileName="Cv.pdf"
+      >
+        {({ blob, url, loading, error }) =>
+          loading ? "Loading document..." : "Download now!"
+        }
+      </PDFDownloadLink>
+    </div>
   );
 };
-const InnerTemplate = ({ theme, tStyle, firstTemplateData }) => {
+const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
   // const firstTemplateData = useSelector((state) => state.forms);
   const {
     classes: {
@@ -60,7 +70,11 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData }) => {
   console.log(firstTemplateData.templateType);
 
   return (
+    // <Document>
+    // <Page size={"A4"}>
+    // <View>
     <Box
+      id={divId}
       style={{
         overflowY: firstTemplateData.perviewMode ? "auto" : "hidden",
         overflowX: "hidden",
@@ -124,6 +138,16 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData }) => {
                 : "a@gmail.com"}
             </Text>
           </Box>
+          <Box className={Contact_Component__content_email__container}>
+            <Heading6 width={"15rem"} alignment={"start"} color={"whitesmoke"}>
+              Phone Number
+            </Heading6>
+            <Text align={"start"} size={"15px"} color={"whitesmoke"}>
+              {firstTemplateData.personal_details.phoneNumber
+                ? firstTemplateData.personal_details.phoneNumber
+                : "+90 333 323 32 32"}
+            </Text>
+          </Box>
           {firstTemplateData.websiteAndSocialLinks.map((item, key) => (
             <Box className={Contact_Component__content_social_links__container}>
               <Heading6
@@ -133,7 +157,9 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData }) => {
               >
                 {item.title}
               </Heading6>
-              <Text align={"start"} size={"15px"} color={"whitesmoke"}>
+              <Text style={{
+              wordBreak: 'break-word'
+            }} align={"start"} size={"15px"} color={"whitesmoke"}>
                 {item.link}
               </Text>
             </Box>
@@ -376,6 +402,9 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData }) => {
         </Flex>
       </Box>
     </Box>
+    // </View>
+    // </Page>
+    // </Document>
   );
 };
 

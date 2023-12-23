@@ -2,21 +2,14 @@ import {
   Box,
   Container,
   Flex,
-  Slider,
   Text,
   Title,
-  useMantineTheme,
+  useMantineTheme
 } from "@mantine/core";
 import React from "react";
 import { useSelector } from "react-redux";
-import { useCanadianFirstTemplateStyles } from "./Canadian.First.Template.style";
 import { useFirstTemplateStyle } from "../First.Template/First.template.style";
-import {
-  Heading2,
-  Heading4,
-  Heading5,
-  Heading6,
-} from "../../../components/Typography/Headings";
+import { useCanadianFirstTemplateStyles } from "./Canadian.First.Template.style";
 
 const CanadianFirstTemplate = ({pdfRef, divId}) => {
   const theme = useMantineTheme();

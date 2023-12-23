@@ -45,7 +45,7 @@ const ForthTemplate = () => {
 
   return (
     <Document>
-      <Page>
+      <Page size={"A4"} >
         <Box
           style={{ boxShadow: "0px 0px 6px 5px #7c797954", overflowY: perviewMode ? "auto" : "hidden", overflowX: 'hidden' }}
           bg={"white"}
