@@ -4,14 +4,15 @@ import {
   Flex,
   Text,
   Title,
-  useMantineTheme
+  useMantineTheme,
 } from "@mantine/core";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useFirstTemplateStyle } from "../First.Template/First.template.style";
 import { useCanadianFirstTemplateStyles } from "./Canadian.First.Template.style";
+import { Helmet } from "react-helmet-async";
 
-const CanadianFirstTemplate = ({pdfRef, divId}) => {
+const CanadianFirstTemplate = ({ pdfRef, divId }) => {
   const theme = useMantineTheme();
   const canadianFirstTemplateData = useSelector((state) => state.forms);
   const {
@@ -25,7 +26,17 @@ const CanadianFirstTemplate = ({pdfRef, divId}) => {
   const { classes } = useCanadianFirstTemplateStyles();
   return (
     <>
-      <Container className={classes.page} mih={"297mm"} w={"210mm"} ref={pdfRef} id={divId}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Permresume | Free Canadian Resume Template</title>
+      </Helmet>
+      <Container
+        className={classes.page}
+        mih={"297mm"}
+        w={"210mm"}
+        ref={pdfRef}
+        id={divId}
+      >
         <Flex direction={"column"} w={"100%"} h={"100%"}>
           {/* //? Header of the Resume Starts from here */}
           <Box p={12} h={"10rem"} w={"100%"}>
@@ -322,14 +333,9 @@ const CanadianFirstTemplate = ({pdfRef, divId}) => {
             </Flex>
           </Box>
 
-          {
-            canadianFirstTemplateData.languageSkills.map((item) => (
-              <Box w={'100%'} pl={12} >
-                  
-              </Box>
-            ))
-          }
-
+          {canadianFirstTemplateData.languageSkills.map((item) => (
+            <Box w={"100%"} pl={12}></Box>
+          ))}
         </Flex>
       </Container>
     </>

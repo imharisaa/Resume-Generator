@@ -1,4 +1,11 @@
-import { Box, Flex, Slider, Text, useMantineTheme } from "@mantine/core";
+import {
+  Box,
+  Flex,
+  Progress,
+  Slider,
+  Text,
+  useMantineTheme,
+} from "@mantine/core";
 import React, { useState } from "react";
 import { useFirstTemplateStyle } from "./First.template.style";
 import {
@@ -10,6 +17,9 @@ import {
 } from "../../../components/Typography/Headings";
 import { useSelector } from "react-redux";
 import { Document, View, Page, PDFDownloadLink } from "@react-pdf/renderer";
+import { useThirdTemplateStyle } from "../third-Template/Third.template.style";
+import { Helmet } from "react-helmet-async";
+import Stepper from "../../../utils/Custom-Slider/Stepper";
 const FristTemplate = ({ pdfRef, divId }) => {
   const firstTemplateData = useSelector((state) => state.forms);
   const tStyle = useFirstTemplateStyle();
@@ -46,6 +56,13 @@ const FristTemplate = ({ pdfRef, divId }) => {
   );
 };
 const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
+
+
+  const steps = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5']; // Your custom steps
+  const barColor = ''; // Customize the bar color
+  const dotColor = 'green'; // Customize the dot color
+  const dotShape = 'circle'; // Customize the dot shape ('circle' or 'square')
+  const dotSize = 10; // Customize the dot size
   // const firstTemplateData = useSelector((state) => state.forms);
   const {
     classes: {
@@ -74,7 +91,7 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
     // <Page size={"A4"}>
     // <View>
     <Box
-      id={divId}
+      id={firstTemplateData.divId}
       style={{
         overflowY: firstTemplateData.perviewMode ? "auto" : "hidden",
         overflowX: "hidden",
@@ -85,6 +102,11 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
       mih={"297mm"}
       w={"210mm"}
     >
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Permresume | Free Best Resume Builder</title>
+      </Helmet>
+
       <Box className={First_Template__col_1}>
         <Box
           w={"15rem"}
@@ -157,9 +179,14 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
               >
                 {item.title}
               </Heading6>
-              <Text style={{
-              wordBreak: 'break-word'
-            }} align={"start"} size={"15px"} color={"whitesmoke"}>
+              <Text
+                style={{
+                  wordBreak: "break-word",
+                }}
+                align={"start"}
+                size={"15px"}
+                color={"whitesmoke"}
+              >
                 {item.link}
               </Text>
             </Box>
@@ -233,19 +260,27 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
                 </Box>
                 <Box w={"15rem"}>
                   {item.skills.map((skill, key) => {
+                    let zero = "";
                     let beginner = "";
                     let skillFull = "";
                     let experienced = "";
                     let advance = "";
 
-                    if (skill.level <= 20) {
+                    if (skill.level === 0) {
+                      zero = "N/A";
+                      // setActiveStep(0)
+                    } else if (skill.level === 25) {
                       beginner = "Beginner";
-                    } else if (skill.level <= 40) {
+                      // setActiveStep(1)
+                    } else if (skill.level === 50) {
                       skillFull = "Skillfull";
-                    } else if (skill.level <= 70) {
+                      // setActiveStep(2)
+                    } else if (skill.level === 75) {
                       experienced = "Experienced";
-                    } else if (skill.level <= 100) {
+                      // setActiveStep(3)
+                    } else if (skill.level === 100) {
                       advance = "Advance";
+                      // setActiveStep(4)
                     }
 
                     return (
@@ -259,15 +294,16 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
                             {skill.skill}
                           </Heading6>
                           <Slider
-                            size={"md"}
+                            size={"xs"}
                             w={"100%"}
-                            radius={"lg"}
+                            radius={"xs"}
                             color={skill.levelColor}
                             value={skill.level}
                             marks={[
-                              { value: 20, label: beginner },
-                              { value: 40, label: skillFull },
-                              { value: 70, label: experienced },
+                              { value: 0, label: zero },
+                              { value: 25, label: beginner },
+                              { value: 50, label: skillFull },
+                              { value: 75, label: experienced },
                               { value: 100, label: advance },
                             ]}
                           />
@@ -295,16 +331,19 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
             </Box>
           )}
           {firstTemplateData.languageSkills.map((item, key) => {
+            let languageZero = "";
             let languageBeginner = "";
             let languageSkillFull = "";
             let languageExperienced = "";
             let languageAdvance = "";
 
-            if (item.level <= 20) {
+            if (item.level === 0) {
+              languageZero= ""
+            } else if (item.level <= 25) {
               languageBeginner = "Beginner";
-            } else if (item.level <= 40) {
+            } else if (item.level <= 50) {
               languageSkillFull = "Skillfull";
-            } else if (item.level <= 70) {
+            } else if (item.level <= 75) {
               languageExperienced = "Experienced";
             } else if (item.level <= 100) {
               languageAdvance = "Advance";
@@ -325,15 +364,16 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
                       ""
                     ) : (
                       <Slider
-                        size={"md"}
+                        size={"xs"}
                         w={"100%"}
                         radius={"lg"}
                         color={item.levelColor}
                         value={item.level}
                         marks={[
-                          { value: 20, label: languageBeginner },
-                          { value: 40, label: languageSkillFull },
-                          { value: 70, label: languageExperienced },
+                          { value: 0, label: languageZero },
+                          { value: 25, label: languageBeginner },
+                          { value: 50, label: languageSkillFull },
+                          { value: 75, label: languageExperienced },
                           { value: 100, label: languageAdvance },
                         ]}
                       />
@@ -399,6 +439,8 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
               );
             })}
           </Box>
+
+          <Education firstTemplateData={firstTemplateData} />
         </Flex>
       </Box>
     </Box>
@@ -409,3 +451,49 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
 };
 
 export default FristTemplate;
+
+export function Education({ firstTemplateData }) {
+  const {
+    classes: { Work_History_Component__heading_container },
+  } = useThirdTemplateStyle();
+  return (
+    <Box w={"100%"} p={"12px"}>
+      <Box p={"12px"} className={Work_History_Component__heading_container}>
+        <Heading3>Education</Heading3>
+      </Box>
+      {firstTemplateData.education.map((item, key) => {
+        return (
+          <Box w="100%" pt={"24px"}>
+            <Flex justify={"space-between"} w={"100%"}>
+              <Box w={"25%"}>
+                {/* <Flex align={"center"} w={"100%"} h={"100%"}> */}
+                <Text weight={"bolder"} color="#737272">
+                  {`${item.startDate} - ${item.endDate}`}
+                </Text>
+                {/* </Flex> */}
+              </Box>
+
+              <Box w={"72%"}>
+                <Heading4>{item.school}</Heading4>
+                <Text italic>
+                  {item.degree}
+                  {item.city === "" ? "" : `, ${item.city}`}
+                </Text>
+                <Box w={"100%"} pl={24} pt={12}>
+                  <div
+                    style={{
+                      color: "lightslategray",
+                    }}
+                    dangerouslySetInnerHTML={{
+                      __html: `${item.details}`,
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Flex>
+          </Box>
+        );
+      })}
+    </Box>
+  );
+}

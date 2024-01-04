@@ -68,7 +68,7 @@ export const printPage = (divId) => {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    height: 100vh;
+                    height: fit-content;
                     margin: 0;
                     padding: 0;
                 }

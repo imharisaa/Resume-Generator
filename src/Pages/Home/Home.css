@@ -1,0 +1,19 @@
+.banner_image {
+    background-image: url('../../assets/banner_resumes.jpeg');
+    width: 100vw;
+    height: 35rem;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: #081c4e;
+}
+
+.qa_banner {
+    width: 100vw;
+    height: 35rem;
+}
+
+.qutation-container {
+    background: #081c4f85;
+    margin: 40px 0px 60px 0px;
+    padding: 30px;
+}

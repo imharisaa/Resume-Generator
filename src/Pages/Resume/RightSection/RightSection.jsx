@@ -10,7 +10,13 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconEye, IconFileDownload, IconFileTypePdf, IconFileUpload, IconJson } from "@tabler/icons-react";
+import {
+  IconEye,
+  IconFileDownload,
+  IconFileTypePdf,
+  IconFileUpload,
+  IconJson,
+} from "@tabler/icons-react";
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -29,7 +35,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import { generatePDF, printPage } from "./pdfgenerator";
 import CanadianFirstTemplate from "../../../Resume_Preview/Templates/Canadian.First.Template/Canadian.First.Template";
 import FristTemplate from "../../../Resume_Preview/Templates/First.Template/First.template";
-
+import { Helmet } from "react-helmet-async";
 
 const RightSection = () => {
   const pdfRef = useRef();
@@ -135,6 +141,10 @@ const RightSection = () => {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Permresume | Free Resume Templates</title>
+      </Helmet>
       <Container
         className={right_section_container}
         p={"xl"}
@@ -180,7 +190,7 @@ const RightSection = () => {
                   title="Download CV As PDF"
                   mr={12}
                   mb={5}
-                  onClick={() => printPage('cvPrint')}
+                  onClick={() => printPage("cvPrint")}
                 >
                   <IconFileTypePdf />
                 </ActionIcon>
@@ -256,9 +266,8 @@ const RightSection = () => {
               <Box className={right_section_container_templates}>
                 <Flex>
                   {/* Template */}
-                  <Box >
-                    {/* <Template pdfRef={pdfRef} /> */}
-                    <FristTemplate pdfRef={pdfRef} divId={'cvPrint'}  />
+                  <Box>
+                    <Template />
                   </Box>
                 </Flex>
               </Box>

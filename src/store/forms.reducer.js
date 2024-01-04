@@ -4,12 +4,14 @@ import SecondTemplate from "../Resume_Preview/Second.Template/Second.template";
 import ThirdTemplate from "../Resume_Preview/Templates/third-Template/Third.template";
 import ForthTemplate from "../Resume_Preview/Templates/forth-Template/Forth.template";
 import CanadianFirstTemplate from "../Resume_Preview/Templates/Canadian.First.Template/Canadian.First.Template";
+import FifthTemplate from "../Resume_Preview/Templates/Fifth.Template/Fifth.Template";
 
 export const templateMaper = {
   "FristTemplate": FristTemplate,
   "SecondTemplate": SecondTemplate,
   "ThirdTemplate": ThirdTemplate,
   "ForthTemplate": ForthTemplate,
+  "FifthTemplate": FifthTemplate,
   "CanadianFirstTemplate": CanadianFirstTemplate
 }
 
@@ -18,6 +20,7 @@ export const templates = [
   "SecondTemplate",
   "ThirdTemplate",
   "ForthTemplate",
+  "FifthTemplate"
 ];
 
 export const canadianTemplates = [
@@ -29,7 +32,8 @@ export const bothTemplate = [
   "SecondTemplate",
   "ThirdTemplate",
   "ForthTemplate",
-  "CanadianFirstTemplate"
+  "CanadianFirstTemplate",
+  "FifthTemplate"
 ];
 
 
@@ -57,6 +61,7 @@ const formsSlice = createSlice({
     templateType: "All",
     perviewMode: false,
     pdf: false,
+    divId: 'cvPrint',
     template: templateStyleChecker(),
     previewTemplate: templateStyleChecker(),
     personal_details: {
@@ -153,6 +158,7 @@ const formsSlice = createSlice({
 
       state.skills[data.payload.id].skill = data.payload.skill;
       state.skills[data.payload.id].level = data.payload.level;
+      state.skills[data.payload.id].dots = data.payload.dots;
       state.skills[data.payload.id].levelColor = data.payload.levelColor;
     },
     deleteSkill(state, data) {
@@ -215,6 +221,7 @@ const formsSlice = createSlice({
       state.professionalSummary = data.payload.professionalSummary
       state.skills = data.payload.skills
       state.websiteAndSocialLinks = data.payload.websiteAndSocialLinks
+      state.languageSkills = data.payload.languageSkills
     },
 
     changeTemplate(state, data) {

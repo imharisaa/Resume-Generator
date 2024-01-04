@@ -6,10 +6,11 @@ import RightSection from "./RightSection/RightSection";
 import { IconArrowBigRightLines } from "@tabler/icons-react";
 import { useDispatch } from "react-redux";
 import { changeTemplateType } from "../../store/forms.reducer";
+import { Helmet } from "react-helmet-async";
 
 const Resume = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const {
     classes: {
       left_section,
@@ -26,15 +27,19 @@ const Resume = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
-  const templateStyle = localStorage.getItem('templateStyle')
+  const templateStyle = localStorage.getItem("templateStyle");
 
   useEffect(() => {
-    console.log("On Console: ", templateStyle)
-    dispatch(changeTemplateType(templateStyle))
-  }, [templateStyle])
+    console.log("On Console: ", templateStyle);
+    dispatch(changeTemplateType(templateStyle));
+  }, [templateStyle]);
 
   return (
     <Box className={resume_container}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Permresume | Free Resume Builder</title>
+      </Helmet>
       <Box
         className={`${left_section} ${isDrawerOpen ? left_section_open : ""}`}
       >

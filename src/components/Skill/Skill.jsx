@@ -154,9 +154,10 @@ const Skill = () => {
                                             w={"35%"}
                                             color={skillVal.levelColor}
                                             marks={[
-                                              { value: 20, label: "." },
-                                              { value: 40, label: "." },
-                                              { value: 70, label: "." },
+                                              { value: 0, label: "." },
+                                              { value: 25, label: "." },
+                                              { value: 50, label: "." },
+                                              { value: 75, label: "." },
                                               { value: 100, label: "." },
                                             ]}
                                             value={skillVal.level}
@@ -234,19 +235,24 @@ const Skill = () => {
                                                   <Slider
                                                     size={"md"}
                                                     w={"100%"}
+                                                    step={25}
                                                     radius={"xl"}
                                                     color={skillVal.levelColor}
                                                     marks={[
                                                       {
-                                                        value: 20,
+                                                        value: 0,
+                                                        label: "",
+                                                      },
+                                                      {
+                                                        value: 25,
                                                         label: "Beginner",
                                                       },
                                                       {
-                                                        value: 40,
+                                                        value: 50,
                                                         label: "Skillfull",
                                                       },
                                                       {
-                                                        value: 70,
+                                                        value: 75,
                                                         label: "Experienced",
                                                       },
                                                       {
@@ -255,19 +261,25 @@ const Skill = () => {
                                                       },
                                                     ]}
                                                     onChange={(e) => {
-                                                      if (e <= 20) {
+                                                      let dots = 0
+                                                      if (e <= 25) {
                                                         color = "red";
-                                                      } else if (e <= 40) {
+                                                        dots = 1
+                                                      } else if (e <= 50) {
                                                         color = "yellow";
-                                                      } else if (e <= 70) {
-                                                        color = "cyan";
+                                                        dots = 2
+                                                      } else if (e <= 75) {
+                                                        color = "cyan"
+                                                        dots = 3
                                                       } else if (e <= 100) {
                                                         color = "green";
+                                                        dots = 4
                                                       }
                                                       const level = e;
                                                       const skill =
                                                         skillVal.skill;
                                                       const levelColor = color;
+
                                                       dispatch(
                                                         updateSkillGroup({
                                                           key,
@@ -275,6 +287,7 @@ const Skill = () => {
                                                           level,
                                                           skill,
                                                           levelColor,
+                                                          dots,
                                                         })
                                                       );
                                                     }}
@@ -304,6 +317,7 @@ const Skill = () => {
                                   skill: "",
                                   level: 0,
                                   levelColor: "",
+                                  dots: 0
                                 };
                                 dispatch(addGroupSkills({ key, skillData }));
                               }}
