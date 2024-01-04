@@ -9,6 +9,7 @@ import {
   Heading6,
 } from "../../../components/Typography/Headings";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet-async";
 
 const ThirdTemplate = () => {
   const {
@@ -37,6 +38,10 @@ const ThirdTemplate = () => {
 
   return (
     <Box className={Third_Template__container} h={"297mm"} w={"210mm"}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Permresume | Free Best Canadian Resume Builder</title>
+      </Helmet>
       <Box p={"12px"} className={Third_Template__col_2}>
         <Flex direction={"column"}>
           <ProfessionalSummary />

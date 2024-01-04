@@ -18,11 +18,8 @@ import { IconCubePlus, IconTrash } from "@tabler/icons-react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addLanguageSkill,
-  addWebSiteAndSocialLinks,
   deleteLanguageSkill,
-  deleteWebSiteAndSocialLinks,
-  updateLanguageSkill,
-  updateWebSiteAndSocialLinks,
+  updateLanguageSkill
 } from "../../store/forms.reducer";
 
 const Language = () => {
@@ -54,13 +51,14 @@ const Language = () => {
                               <Slider
                                 // disabled
                                 radius={false}
-                                size={"sm"}
+                                size={"xs"}
                                 w={"35%"}
                                 color={item.levelColor}
                                 marks={[
-                                  { value: 20, label: "." },
-                                  { value: 40, label: "." },
-                                  { value: 70, label: "." },
+                                  { value: 0, label: "." },
+                                  { value: 25, label: "." },
+                                  { value: 50, label: "." },
+                                  { value: 75, label: "." },
                                   { value: 100, label: "." },
                                 ]}
                                 value={item.level}
@@ -126,21 +124,22 @@ const Language = () => {
                                     >
                                       <Slider
                                         size={"md"}
+                                        step={25}
                                         w={"100%"}
                                         radius={"xl"}
                                         color={item.levelColor}
                                         defaultValue={item.level}
                                         marks={[
                                           {
-                                            value: 20,
+                                            value: 25,
                                             label: "Beginner",
                                           },
                                           {
-                                            value: 40,
+                                            value: 50,
                                             label: "Skillfull",
                                           },
                                           {
-                                            value: 70,
+                                            value: 75,
                                             label: "Experienced",
                                           },
                                           {
@@ -149,11 +148,11 @@ const Language = () => {
                                           },
                                         ]}
                                         onChange={(e) => {
-                                          if (e <= 20) {
+                                          if (e <= 25) {
                                             color = "red";
-                                          } else if (e <= 40) {
+                                          } else if (e <= 50) {
                                             color = "yellow";
-                                          } else if (e <= 70) {
+                                          } else if (e <= 75) {
                                             color = "cyan";
                                           } else if (e <= 100) {
                                             color = "green";

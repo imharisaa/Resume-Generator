@@ -9,6 +9,8 @@ import {
   Heading6,
 } from "../../components/Typography/Headings";
 import { useSelector } from "react-redux";
+import { useThirdTemplateStyle } from "../Templates/third-Template/Third.template.style";
+import { Helmet } from "react-helmet-async";
 
 const SecondTemplate = () => {
   const secondTemplateData = useSelector((state) => state.forms);
@@ -33,7 +35,16 @@ const SecondTemplate = () => {
   const theme = useMantineTheme();
 
   return (
-    <Box className={Second_Template__container} h={"297mm"} w={"210mm"}>
+    <Box
+      className={Second_Template__container}
+      id={secondTemplateData.divId}
+      h={"297mm"}
+      w={"210mm"}
+    >
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Permresume | Free Best Resume Generator</title>
+      </Helmet>
       <Box className={Second_Template__col_1}>
         <Box
           w={"15rem"}
@@ -88,6 +99,16 @@ const SecondTemplate = () => {
                 : "a@gmail.com"}
             </Text>
           </Box>
+          <Box className={Contact_Component__content_email__container}>
+            <Heading6 width={"15rem"} alignment={"start"} color={"whitesmoke"}>
+              Phone Number
+            </Heading6>
+            <Text align={"start"} size={"15px"} color={"whitesmoke"}>
+              {secondTemplateData.personal_details.phoneNumber
+                ? secondTemplateData.personal_details.phoneNumber
+                : "+90 333 473 33 24"}
+            </Text>
+          </Box>
           {secondTemplateData.websiteAndSocialLinks.map((item, key) => (
             <Box className={Contact_Component__content_social_links__container}>
               <Heading6
@@ -97,7 +118,14 @@ const SecondTemplate = () => {
               >
                 {item.title}
               </Heading6>
-              <Text align={"start"} size={"15px"} color={"whitesmoke"}>
+              <Text
+                style={{
+                  wordBreak: "break-word",
+                }}
+                align={"start"}
+                size={"15px"}
+                color={"whitesmoke"}
+              >
                 {item.link}
               </Text>
             </Box>
@@ -245,9 +273,9 @@ const SecondTemplate = () => {
                   <Flex justify={"space-between"} w={"100%"}>
                     <Box w={"25%"}>
                       {/* <Flex align={"center"} w={"100%"} h={"100%"}> */}
-                        <Text weight={"bolder"} color="#737272">
-                          {`${item.startDate} - ${item.endDate}`}
-                        </Text>
+                      <Text weight={"bolder"} color="#737272">
+                        {`${item.startDate} - ${item.endDate}`}
+                      </Text>
                       {/* </Flex> */}
                     </Box>
                     <Box w={"72%"}>
@@ -279,3 +307,47 @@ const SecondTemplate = () => {
 };
 
 export default SecondTemplate;
+
+export function Education({ secondTemplateData }) {
+  const {
+    classes: { Work_History_Component__heading_container },
+  } = useThirdTemplateStyle();
+  return (
+    <Box w={"100%"} p={"12px"}>
+      <Box p={"12px"} className={Work_History_Component__heading_container}>
+        <Heading3>Education</Heading3>
+      </Box>
+      {secondTemplateData.education.map((item, key) => {
+        return (
+          <Box w="100%" pt={"24px"}>
+            <Flex justify={"space-between"} w={"100%"}>
+              <Box w={"25%"}>
+                <Text weight={"bolder"} color="#737272">
+                  {`${item.startDate} - ${item.endDate}`}
+                </Text>
+              </Box>
+
+              <Box w={"72%"}>
+                <Heading4>{item.school}</Heading4>
+                <Text italic>
+                  {item.degree}
+                  {item.city === "" ? "" : `, ${item.city}`}
+                </Text>
+                <Box w={"100%"} pl={24} pt={12}>
+                  <div
+                    style={{
+                      color: "lightslategray",
+                    }}
+                    dangerouslySetInnerHTML={{
+                      __html: `${item.details}`,
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Flex>
+          </Box>
+        );
+      })}
+    </Box>
+  );
+}

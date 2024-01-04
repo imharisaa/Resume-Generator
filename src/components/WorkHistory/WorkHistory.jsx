@@ -11,7 +11,7 @@ import {
   Title,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
-import React from "react";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
 
 import { IconCubePlus, IconTrash } from "@tabler/icons-react";
@@ -27,6 +27,8 @@ import { v4 as uuidv4 } from "uuid";
 const WorkHistory = () => {
   const workHistoryData = useSelector((state) => state.forms.employmentHistory);
   const dispatch = useDispatch();
+
+  const [ Present, setPresent ] = useState(false)
 
   return (
     <>
@@ -189,13 +191,16 @@ const WorkHistory = () => {
                                       disabled={item.present}
                                     />
                                 </Flex>
-                                <Checkbox label="Currently Working" pt={'12px'} onChange={(e) => {
-                                      const endDate = e ? 'Present' : item.endDate;
+                                <Checkbox defaultChecked={Present} label="Currently Working" pt={'12px'} onChange={(e) => {
+                                  debugger
+                                      setPresent(!Present)
+                                      const endDate = Present ? 'Present' : item.endDate;
                                       const jobTitle = item.jobTitle;
                                       const employer = item.employer;
                                       const startDate = item.startDate;
                                       const city = item.city;
                                       const details = item.details;
+                                      
                                       dispatch(
                                         updateWorkHistory({
                                           id: key,
@@ -205,7 +210,7 @@ const WorkHistory = () => {
                                           jobTitle,
                                           city,
                                           details,
-                                          present: true
+                                          present: Present
                                         })
                                       );
                                     }}/>

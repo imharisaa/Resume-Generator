@@ -3,12 +3,16 @@ import FristTemplate from "../Resume_Preview/Templates/First.Template/First.temp
 import SecondTemplate from "../Resume_Preview/Second.Template/Second.template";
 import ThirdTemplate from "../Resume_Preview/Templates/third-Template/Third.template";
 import ForthTemplate from "../Resume_Preview/Templates/forth-Template/Forth.template";
+import CanadianFirstTemplate from "../Resume_Preview/Templates/Canadian.First.Template/Canadian.First.Template";
+import FifthTemplate from "../Resume_Preview/Templates/Fifth.Template/Fifth.Template";
 
 export const templateMaper = {
   "FristTemplate": FristTemplate,
   "SecondTemplate": SecondTemplate,
   "ThirdTemplate": ThirdTemplate,
-  "ForthTemplate": ForthTemplate
+  "ForthTemplate": ForthTemplate,
+  "FifthTemplate": FifthTemplate,
+  "CanadianFirstTemplate": CanadianFirstTemplate
 }
 
 export const templates = [
@@ -16,13 +20,50 @@ export const templates = [
   "SecondTemplate",
   "ThirdTemplate",
   "ForthTemplate",
+  "FifthTemplate"
 ];
+
+export const canadianTemplates = [
+  "CanadianFirstTemplate"
+];
+
+export const bothTemplate = [
+  "FristTemplate",
+  "SecondTemplate",
+  "ThirdTemplate",
+  "ForthTemplate",
+  "CanadianFirstTemplate",
+  "FifthTemplate"
+];
+
+
+
+const templateStyle = localStorage.getItem("templateStyle")
+
+const templateStyleChecker = () => {
+  let result = ""
+
+  if (templateStyle === "NormalTemplate") {
+    result = "FristTemplate"
+  } else if (templateStyle === "CanadianTemplate") {
+    result = "CanadianFirstTemplate"
+  } else if (templateStyle === "BothTemplate") {
+    result = "FristTemplate"
+  }
+
+  return result
+
+}
 
 const formsSlice = createSlice({
   name: "forms",
   initialState: {
-    template: "FristTemplate",
-    previewTemplate: "FristTemplate",
+    templateType: "All",
+    perviewMode: false,
+    pdf: false,
+    divId: 'cvPrint',
+    template: templateStyleChecker(),
+    previewTemplate: templateStyleChecker(),
     personal_details: {
       wantedJobTitle: "",
       pfpUri: "",
@@ -117,6 +158,7 @@ const formsSlice = createSlice({
 
       state.skills[data.payload.id].skill = data.payload.skill;
       state.skills[data.payload.id].level = data.payload.level;
+      state.skills[data.payload.id].dots = data.payload.dots;
       state.skills[data.payload.id].levelColor = data.payload.levelColor;
     },
     deleteSkill(state, data) {
@@ -173,13 +215,13 @@ const formsSlice = createSlice({
     },
 
     uploadCVData(state, data) {
-      debugger
       state.education = data.payload.education
       state.employmentHistory = data.payload.employmentHistory
       state.personal_details = data.payload.personal_details
       state.professionalSummary = data.payload.professionalSummary
       state.skills = data.payload.skills
       state.websiteAndSocialLinks = data.payload.websiteAndSocialLinks
+      state.languageSkills = data.payload.languageSkills
     },
 
     changeTemplate(state, data) {
@@ -204,7 +246,23 @@ const formsSlice = createSlice({
 
     deleteLanguageSkill(state, data) {
       state.languageSkills.splice(data.payload, 1)
+    },
+
+    //? Set Template Type Reducer
+
+    changeTemplateType(state, data) {
+      state.templateType = data.payload
+    },
+
+    changePreviewMode(state, data) {
+      debugger
+      state.perviewMode = data.payload
+    },
+
+    changePdfDownloadToggler(state, data) {
+      state.pdf = data.payload 
     }
+
   },
 
 
@@ -235,6 +293,12 @@ export const {
   changeTemplate,
   addLanguageSkill,
   deleteLanguageSkill,
-  updateLanguageSkill
+  updateLanguageSkill,
+  changeTemplateType,
+  changePreviewMode,
+  changePdfDownloadToggler
 } = formsSlice.actions;
 export default formsSlice.reducer;
+
+
+//Hyouka

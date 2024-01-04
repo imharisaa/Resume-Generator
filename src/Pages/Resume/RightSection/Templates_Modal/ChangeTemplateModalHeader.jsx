@@ -127,8 +127,8 @@ const PlateSelector = ({ color }) => {
 const useChangeTemplateModalHeaderStyle = createStyles((theme) => ({
   container: {
     display: "flex",
-    position: "fixed",
-    width: "97rem",
+    // position: "fixed",
+    width: "100%",
     backgroundColor: "white",
   },
 }));

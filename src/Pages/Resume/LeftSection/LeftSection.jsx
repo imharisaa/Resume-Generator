@@ -8,15 +8,19 @@ import WebsitesSocialLinks from "../../../components/Websites&SocialLinks/Websit
 import Education from "../../../components/Education/Education";
 import Skill from "../../../components/Skill/Skill";
 import Language from "../../../components/Language/Language";
+import { Helmet } from "react-helmet-async";
 
 const LeftSection = () => {
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Permresume | Free Canadian Resume</title>
+      </Helmet>
       {/* <Box h={'100vh'}> */}
       <PersonalDetails />
       <ProfessionalSummary />
       <WorkHistory />
-      <Education />
       <WebsitesSocialLinks />
       <Education />
       <Skill />
