@@ -256,7 +256,7 @@ const RightSection = () => {
               <Box className={right_section_container_templates}>
                 <Flex>
                   {/* Template */}
-                  <Box >
+                  <Box id={'targetDom'} >
                     {/* <Template pdfRef={pdfRef} /> */}
                     <FristTemplate pdfRef={pdfRef} divId={'cvPrint'}  />
                   </Box>

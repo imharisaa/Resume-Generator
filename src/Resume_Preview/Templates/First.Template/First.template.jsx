@@ -1,5 +1,5 @@
 import { Box, Flex, Slider, Text, useMantineTheme } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useFirstTemplateStyle } from "./First.template.style";
 import {
   Heading1,
@@ -10,6 +10,8 @@ import {
 } from "../../../components/Typography/Headings";
 import { useSelector } from "react-redux";
 import { Document, View, Page, PDFDownloadLink } from "@react-pdf/renderer";
+import { Splitter } from "@react-pdf-viewer/core";
+import { setData } from "../../../store/forms.reducer";
 const FristTemplate = ({ pdfRef, divId }) => {
   const firstTemplateData = useSelector((state) => state.forms);
   const tStyle = useFirstTemplateStyle();
@@ -45,8 +47,245 @@ const FristTemplate = ({ pdfRef, divId }) => {
     </div>
   );
 };
+
+function splitDivContent(divId, newHeight) {
+  const div = document.getElementById(divId);
+
+  // Reading the current height and inner text of the given div
+  const currentHeight = div.clientHeight;
+  const innerText = div.innerText;
+
+  // Resetting the height of the given div to the new height
+  div.style.height = `${newHeight}px`;
+
+  // Splitting the inner text into two parts to fit the new height
+  const words = innerText.split(' ');
+  let firstPart = '';
+  let secondPart = '';
+  let currentPart = '';
+
+  for (let i = 0; i < words.length; i++) {
+    currentPart += words[i] + ' ';
+    div.innerText = currentPart;
+
+    if (div.clientHeight > newHeight) {
+      secondPart = innerText.substring(currentPart.length);
+      break;
+    }
+
+    firstPart = currentPart;
+  }
+
+  // Creating a new div for the remaining text with auto height
+  const newDiv = document.createElement('div');
+  newDiv.innerText = secondPart;
+  newDiv.style.height = 'auto';
+  newDiv.style.pageBreakBefore = 'always';
+
+  // Copying styles from the original div to the new div
+  const computedStyles = window.getComputedStyle(div);
+  Array.from(computedStyles).forEach((key) => {
+    newDiv.style[key] = computedStyles[key];
+  });
+
+  // Appending the new div after the given div
+  div.insertAdjacentElement('afterend', newDiv);
+}
+
+class ContentSplitter {
+  constructor(tag, childDivMaxPossibleHeight ,segmentDivHeight) {
+    // this.div = document.getElementById(divId);
+    this.div = tag;
+    this.newHeight = childDivMaxPossibleHeight;
+    this.innerContent = this.div.innerHTML || this.div.innerText;
+    this.isHTML = /<[a-z][\s\S]*>/i.test(this.innerContent);
+    this.segmentDivHeight = segmentDivHeight; 
+  }
+
+  splitContent() {
+    this.div.style.height = `${this.newHeight}px`;
+
+    let firstPart = '';
+    let secondPart = '';
+
+    if (this.isHTML) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = this.innerContent;
+
+      let tempInnerHTML = '';
+
+      for (let i = 0; i < tempDiv.children.length; i++) {
+        const child = tempDiv.children[i];
+        tempInnerHTML += child.outerHTML;
+        tempDiv.innerHTML = tempInnerHTML;
+
+        if (tempDiv.clientHeight > this.newHeight) {
+          const lastChildIndex = tempDiv.children[i - 1] ? i - 1 : i;
+          const lastChild = tempDiv.children[lastChildIndex];
+          const tag = lastChild.tagName.toLowerCase();
+          const closingTag = `</${tag}>`;
+
+          const firstPartContent = tempInnerHTML.substring(
+            0,
+            tempInnerHTML.lastIndexOf(closingTag) + closingTag.length
+          );
+          firstPart = firstPartContent;
+
+          const openingTag = `<${tag}>`;
+          secondPart = openingTag + this.innerContent.substring(firstPartContent.length);
+          break;
+        }
+
+        firstPart = tempInnerHTML;
+      }
+    } else {
+      // Splitting logic for plain text remains the same as previous implementation
+      const words = this.innerContent.split(' ');
+      let currentPart = '';
+
+      for (let i = 0; i < words.length; i++) {
+        currentPart += words[i] + ' ';
+        this.div.innerHTML = currentPart;
+
+        if (this.div.clientHeight > this.newHeight) {
+          secondPart = this.innerContent.substring(currentPart.length);
+          break;
+        }
+
+        firstPart = currentPart;
+      }
+    }
+
+  return {details:[firstPart, secondPart], isHTML:this.isHTML};
+  }
+}
+
+function mmToPx(mm) {
+  const inches = mm / 25.4; // 1 inch = 25.4 millimeters
+  const pixels = inches * 96; // Assuming 96 pixels per inch (PPI)
+  return pixels;
+}
+
+function pxToMm(px) {
+  const inches = px / 96; // Assuming 96 pixels per inch (PPI)
+  const millimeters = inches * 25.4; // 1 inch = 25.4 millimeters
+  return millimeters;
+}
+function getYPositionDifference(parentRef, childRef, counter) {
+
+  const parentRect = parentRef.current.getBoundingClientRect();
+  const grandChildRect = childRef.current.getBoundingClientRect();
+
+  const parentTop = parentRect.top;
+
+  const grandChildBottom = grandChildRect.bottom;
+  const parentBottom = parentRect.bottom
+  const difference = grandChildBottom - parentTop;
+  const accuratePageHeight = mmToPx(297) * counter;
+  const segmentDivHeight = grandChildRect.bottom - accuratePageHeight  
+  const childDivMaxPossibleHeight = accuratePageHeight- grandChildRect.top 
+
+  if (difference > accuratePageHeight) {
+    return { pageBreak: true, childDivMaxPossibleHeight , segmentDivHeight}
+  }
+  return { pageBreak: false }
+}
+
+const PText = ({ parentRef, data, style }) => {
+  const divRef = useRef(null);
+  const counter = useSelector((state) => state.forms.counter)
+  useEffect(() => {
+    if (divRef.current) {
+      debugger
+      const { pageBreak, childDivMaxPossibleHeight , segmentDivHeight } = getYPositionDifference(parentRef, divRef, counter)
+      if(pageBreak){
+        const splitter = new ContentSplitter(divRef.current, childDivMaxPossibleHeight, segmentDivHeight)
+        const {details} = splitter.splitContent()
+        setData({...data, details})
+
+      }
+    }
+  }, [data.details ]);
+  if (data.details.length > 1)
+    return (
+      <>
+
+        {
+          data.details.map((detail, key) => (
+            <Box key={key} w={"100%"} p={"24px"} style={{ pageBreakAfter: isLastIndex(data.details, key) ? 'always' : 'unset' }}>
+              <div
+                style={{
+                  color: 'lightgrey'
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: `${detail}`,
+                }}
+              />
+            </Box>
+          ))
+        }
+      </>
+    )
+  
+
+ 
+
+
+  return (
+    <>
+
+      {
+        data.details.map((detail, key) => (
+          <Box ref={divRef} key={key} w={"100%"} p={"24px"} style={{ pageBreakAfter: isLastIndex(data.details, key) ? 'always' : 'unset' }}>
+            <div
+              style={{
+                ...style
+              }}
+              dangerouslySetInnerHTML={{
+                __html: `${detail}`,
+              }}
+            />
+          </Box>
+        ))
+      }
+
+    </>
+  );
+};
+
+function isLastIndex(arr, currentIndex) {
+  return currentIndex === arr.length - 1;
+}
+
+
 const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
   // const firstTemplateData = useSelector((state) => state.forms);
+
+  const docDiv = useRef(null);
+
+  const counterRef = useRef(1)
+  const [counter, setCounter] = useState(1);// should be set in redux
+  useEffect(() => {
+
+    counterRef.current = counter
+  }, [counterRef.current != counter])
+
+  const divHeightRef = useRef(null)
+  const [docDivHeight, setDocDivHeight] = useState(0);
+
+  useEffect(() => {
+    if (docDiv.current) {
+
+      const height = docDiv.current.clientHeight; // in pixels
+      // Convert body height from pixels to mm (assuming 1mm = 3.78px)
+      // ? totalHeightInMM = height / 3.78;
+      if (docDivHeight != height) {
+        setDocDivHeight(height);
+      }
+    }
+  });
+
+
   const {
     classes: {
       First_Template__container,
@@ -74,6 +313,7 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
     // <Page size={"A4"}>
     // <View>
     <Box
+      ref={docDiv}
       id={divId}
       style={{
         overflowY: firstTemplateData.perviewMode ? "auto" : "hidden",
@@ -158,8 +398,8 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
                 {item.title}
               </Heading6>
               <Text style={{
-              wordBreak: 'break-word'
-            }} align={"start"} size={"15px"} color={"whitesmoke"}>
+                wordBreak: 'break-word'
+              }} align={"start"} size={"15px"} color={"whitesmoke"}>
                 {item.link}
               </Text>
             </Box>
@@ -184,15 +424,15 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
                   item.groupTitle === "Skill Group Title"
                     ? ""
                     : item.groupTitle === ""
-                    ? ""
-                    : "20px"
+                      ? ""
+                      : "20px"
                 }
                 bg={
                   item.groupTitle === "Skill Group Title"
                     ? ""
                     : item.groupTitle === ""
-                    ? ""
-                    : theme.colors.custom.darker
+                      ? ""
+                      : theme.colors.custom.darker
                 }
               >
                 <Box
@@ -200,22 +440,22 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
                     item.groupTitle === "Skill Group Title"
                       ? "0"
                       : item.groupTitle === ""
-                      ? "0"
-                      : "25px"
+                        ? "0"
+                        : "25px"
                   }
                   w={
                     item.groupTitle === "Skill Group Title"
                       ? "0"
                       : item.groupTitle === ""
-                      ? "0"
-                      : "100%"
+                        ? "0"
+                        : "100%"
                   }
                   p={
                     item.groupTitle === "Skill Group Title"
                       ? "0"
                       : item.groupTitle === ""
-                      ? "0"
-                      : "12px"
+                        ? "0"
+                        : "12px"
                   }
                   className={Skill_Component__skill_heading}
                 >
@@ -227,8 +467,8 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
                     {item.groupTitle === "Skill Group Title"
                       ? ""
                       : item.groupTitle === ""
-                      ? ""
-                      : item.groupTitle}
+                        ? ""
+                        : item.groupTitle}
                   </Heading6>
                 </Box>
                 <Box w={"15rem"}>
@@ -348,7 +588,19 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
 
       <Box p={"12px"} className={First_Template__col_2}>
         <Flex direction={"column"}>
-          <Box w={"100%"} p={"24px"}>
+          {/* {firstTemplateData.professionalSummary.details.map((detail, key)=> {
+            <Box key={key} w={"100%"} p={"24px"} style={{pageBreakAfter: isLastIndex(firstTemplateData.professionalSummary.details, key)? 'always':'unset'}}>
+            <div
+              style={{
+                color: "lightslategray",
+              }}
+              dangerouslySetInnerHTML={{
+                __html: `${detail}`,
+              }}
+            />
+          </Box>
+          })} */}
+          {/* <Box w={"100%"} p={"24px"}>
             <div
               style={{
                 color: "lightslategray",
@@ -357,7 +609,9 @@ const InnerTemplate = ({ theme, tStyle, firstTemplateData, divId }) => {
                 __html: `${firstTemplateData.professionalSummary.details}`,
               }}
             />
-          </Box>
+          </Box> */}
+
+          <PText data={firstTemplateData.professionalSummary} parentRef={docDiv} />
 
           <Box w={"100%"} p={"12px"}>
             <Box

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        .part1 {
+            page-break-after: always;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="parent" style="
+            width: 25rem;
+            height: 300px;
+            background-color: aqua;
+            color: black;
+            border: 1px solid gray;
+        ">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula vestibulum imperdiet. Proin velit tellus, pellentesque id fringilla at, feugiat sagittis enim. Nunc rhoncus ex ac ex rhoncus, at malesuada risus elementum. Pellentesque et iaculis purus, mattis ullamcorper massa. Suspendisse aliquam ex nec eros aliquam euismod. Nam ac volutpat tellus. Duis dapibus gravida ante. Ut lectus quam, maximus a orci non, pellentesque sagittis enim. Pellentesque tincidunt accumsan vulputate. Mauris ut elit vulputate, varius odio quis, venenatis lacus. Maecenas ultricies urna dolor, in dignissim ante interdum ac.
+
+            Quisque vel nulla dui. Nunc lacinia dapibus malesuada. Phasellus sed tempus diam. Etiam blandit tellus vitae augue facilisis, non egestas sem elementum. Integer ipsum diam, ultricies in sapien non, eleifend vulputate ipsum. Duis rutrum lectus eu dui aliquet ornare. Fusce non nulla at felis efficitur semper. Aliquam imperdiet tempus orci, non convallis tortor molestie nec. Integer a elit at dui sollicitudin blandit. In condimentum finibus neque vitae porttitor. Fusce vehicula, odio nec pretium placerat, urna nunc efficitur augue, vitae convallis ligula velit a sem.
+            
+            Nullam gravida nulla sed neque euismod, eget luctus quam dignissim. Suspendisse molestie magna ante, eu elementum turpis dignissim sed. Ut condimentum sit amet ex non efficitur. Suspendisse lobortis nulla in tellus feugiat venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus aliquam mattis diam sit amet vestibulum. Nullam sagittis, tellus eget finibus placerat, tortor erat sollicitudin purus, in fermentum elit quam vel urna. Donec efficitur, mi ut faucibus molestie, justo ex convallis justo, vel consequat leo neque et mi. Nullam pharetra, nibh vel mattis aliquet, mauris ex commodo massa, quis convallis tellus velit in massa. Integer aliquam magna vitae odio interdum aliquam. Curabitur vestibulum nisl nisi, id ornare sem pulvinar vitae. Integer neque nisl, auctor mattis orci quis, pellentesque accumsan ex.
+    </div>
+    <!-- <script>
+$(document).ready(function() {
+  var parentDiv = $('#parentDiv');
+  var totalChildren = parentDiv.children().length;
+  var desiredHeight = 200; // Desired height for each part
+
+  var firstPartHeight = 0;
+  var secondPartHeight = 0;
+  var currentHeight = 0;
+
+  parentDiv.children().each(function(index, element) {
+    currentHeight += $(element).outerHeight(true);
+
+    if (currentHeight <= desiredHeight && index !== totalChildren - 1) {
+      firstPartHeight = currentHeight;
+    } else {
+      secondPartHeight = currentHeight - firstPartHeight;
+      return false; // Break the loop once the heights are determined
+    }
+  });
+
+  // Split the div into two parts
+  var firstPart = parentDiv.clone().empty();
+  var secondPart = parentDiv.clone().empty();
+
+  parentDiv.children().each(function(index, element) {
+    if (index + 1 <= totalChildren && firstPartHeight > 0) {
+      firstPartHeight -= $(element).outerHeight(true);
+      firstPart.append($(element).clone());
+    } else {
+      secondPart.append($(element).clone());
+    }
+  });
+
+  parentDiv.replaceWith(`<div id="firstPart">${firstPart.html()}</div><div id="secondPart">${secondPart.html()}</div>`);
+});
+    </script> -->
+
+    <script>
+        $(document).ready(function() {
+  var targetTag = $("#parent"); // Replace with your tag's selector
+  var desiredHeight = 300; // Replace with your desired height
+
+  var tempContainer = $("<div>");
+  targetTag.children().appendTo(tempContainer);
+
+  var firstHalf = tempContainer.children().slice(0, Math.ceil(200));
+  var secondHalf = tempContainer.children().slice(Math.ceil(100));
+
+  targetTag.empty();
+
+  var part1 = $("<div>", {
+    "class": "part1" // Optional: Add a class for styling
+  });
+  var part2 = $("<div>", {
+    "class": "part2" // Optional: Add a class for styling
+  });
+
+  targetTag.append(part1, part2);
+
+  firstHalf.appendTo(part1);
+  secondHalf.appendTo(part2);
+
+  part1.css("height", desiredHeight + "px");
+  part2.css("height", desiredHeight + "px");
+
+  // Optionally, apply overflow styles if needed:
+  part1.css("overflow", "auto");
+  part2.css("overflow", "auto");
+});
+
+    </script>
+</body>
+</html>

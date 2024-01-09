@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Divide Content</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* CSS for demonstration purposes */
+        #parent {
+            width: 25rem;
+            height: 300px;
+            background-color: aqua;
+            color: black;
+            border: 1px solid gray;
+            overflow: hidden; /* Hide overflow content */
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+        .part {
+            border: 1px solid black;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container" style="height: 200px; width: 300px; overflow: hidden;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula vestibulum imperdiet. Proin velit tellus, pellentesque id fringilla at, feugiat sagittis enim. Nunc rhoncus ex ac ex rhoncus, at malesuada risus elementum. Pellentesque et iaculis purus, mattis ullamcorper massa. Suspendisse aliquam ex nec eros aliquam euismod. Nam ac volutpat tellus. Duis dapibus gravida ante. Ut lectus quam, maximus a orci non, pellentesque sagittis enim. Pellentesque tincidunt accumsan vulputate. Mauris ut elit vulputate, varius odio quis, venenatis lacus. Maecenas ultricies urna dolor, in dignissim ante interdum ac.
+
+Quisque vel nulla dui. Nunc lacinia dapibus malesuada. Phasellus sed tempus diam. Etiam blandit tellus vitae augue facilisis, non egestas sem elementum. Integer ipsum diam, ultricies in sapien non, eleifend vulputate ipsum. Duis rutrum lectus eu dui aliquet ornare. Fusce non nulla at felis efficitur semper. Aliquam imperdiet tempus orci, non convallis tortor molestie nec. Integer a elit at dui sollicitudin blandit. In condimentum finibus neque vitae porttitor. Fusce vehicula, odio nec pretium placerat, urna nunc efficitur augue, vitae convallis ligula velit a sem.
+
+Nullam gravida nulla sed neque euismod, eget luctus quam dignissim. Suspendisse molestie magna ante, eu elementum turpis dignissim sed. Ut condimentum sit amet ex non efficitur. Suspendisse lobortis nulla in tellus feugiat venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus aliquam mattis diam sit amet vestibulum. Nullam sagittis, tellus eget finibus placerat, tortor erat sollicitudin purus, in fermentum elit quam vel urna. Donec efficitur, mi ut faucibus molestie, justo ex convallis justo, vel consequat leo neque et mi. Nullam pharetra, nibh vel mattis aliquet, mauris ex commodo massa, quis convallis tellus velit in massa. Integer aliquam magna vitae odio interdum aliquam. Curabitur vestibulum nisl nisi, id ornare sem pulvinar vitae. Integer neque nisl, auctor mattis orci quis, pellentesque accumsan ex.
+    </div>
+
+<script>
+    const container = document.getElementById('container');
+const largeText = `Lorem ipsum ... (your entire large text here)`;
+
+// Create a hidden element with the same text content
+const hiddenElement = document.createElement('div');
+hiddenElement.style.visibility = 'hidden';
+hiddenElement.style.position = 'absolute';
+hiddenElement.style.width = 'auto';
+hiddenElement.style.height = 'auto';
+hiddenElement.style.whiteSpace = 'nowrap';
+hiddenElement.style.pointerEvents = 'none';
+hiddenElement.innerHTML = largeText;
+
+document.body.appendChild(hiddenElement);
+
+// Measure the dimensions of the hidden element
+const hiddenElementWidth = hiddenElement.offsetWidth;
+const hiddenElementHeight = hiddenElement.offsetHeight;
+
+// Find the index where the text starts to be hidden
+let startIndex = 0;
+for (let i = 0; i < largeText.length; i++) {
+    hiddenElement.innerHTML = largeText.substring(0, i);
+    if (hiddenElement.offsetHeight > container.clientHeight || hiddenElement.offsetWidth > container.clientWidth) {
+        startIndex = i - 1;
+        break;
+    }
+}
+
+// Remove the hidden element
+document.body.removeChild(hiddenElement);
+
+console.log('Index where text starts to be hidden:', startIndex);
+    var $parent = $('#parent');
+    var content = $parent.text();
+
+    // Function to find the overflow point based on a given height
+    function findOverflowPoint(text, maxHeight) {
+        var div = $('<div></div>').css({
+            'visibility': 'hidden',
+            'height': 'auto',
+            'width': $parent.width(),
+            'white-space': 'nowrap'
+        }).appendTo('body').text(text);
+
+        var len = text.length;
+        var low = 0;
+        var high = len;
+
+        while (low <= high) {
+            var mid = Math.floor((low + high) / 2);
+            var subString = text.substring(0, mid);
+            div.text(subString);
+            
+            if (div.height() <= maxHeight) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        div.remove();
+        return high;
+    }
+
+    // Find the overflow point
+    var overflowIndex = findOverflowPoint(content, 100); // Height of the first part
+
+    // Split content based on the overflow index
+    var firstPart = content.substring(0, overflowIndex);
+    var secondPart = content.substring(overflowIndex);
+
+    // Create divs for the divided parts
+    var $firstDiv = $('<div class="part"></div>').text(firstPart);
+    var $secondDiv = $('<div class="part"></div>').text(secondPart);
+
+    // Append divided parts to the parent
+    $parent.empty().append($firstDiv).append($secondDiv);
+;
+</script>
+
+</body>
+</html>

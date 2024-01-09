@@ -54,6 +54,7 @@ const templateStyleChecker = () => {
 const formsSlice = createSlice({
   name: "forms",
   initialState: {
+    counter: 1,
     templateType: "All",
     perviewMode: false,
     pdf: false,
@@ -75,8 +76,14 @@ const formsSlice = createSlice({
       placeOfBirth: "",
       dateOfBirth: "",
     },
+    // professionalSummary: {
+     
+    //   details: `<p>Motivated Sales Associate with 5 years of experience boosting sales and customer loyalty through individualized service. Resourceful expert at learning customer needs, directing to desirable merchandise and upselling to meet sales quotas. Committed to strengthening customer experiences with positivity and professionalism when answering requests and processing sales.</p>`,
+    // },
     professionalSummary: {
-      details: `<p>Motivated Sales Associate with 5 years of experience boosting sales and customer loyalty through individualized service. Resourceful expert at learning customer needs, directing to desirable merchandise and upselling to meet sales quotas. Committed to strengthening customer experiences with positivity and professionalism when answering requests and processing sales.</p>`,
+      name:"professionalSummary",
+      id:1,
+      details: [`<p>Motivated Sales Associate with 5 years of experience boosting sales and customer loyalty through individualized service. Resourceful expert at learning customer needs, directing to desirable merchandise and upselling to meet sales quotas. Committed to strengthening customer experiences with positivity and professionalism when answering requests and processing sales.</p>`],
     },
     employmentHistory: [],
     education: [],
@@ -92,7 +99,9 @@ const formsSlice = createSlice({
   },
   reducers: {
     //? Work History Reducers
-
+    changeCounter(state, {payload}) {
+      state.counter = payload
+    },
     addWorkHistory(state, data) {
       state.employmentHistory.push(data.payload);
     },
@@ -162,6 +171,8 @@ const formsSlice = createSlice({
     //? Professional Summary Reducers
 
     updateProfessionalSummary(state, data) {
+      state.counter = 1;
+      reduceArray(state);
       state.professionalSummary.details = data.payload;
     },
 
@@ -254,13 +265,32 @@ const formsSlice = createSlice({
 
     changePdfDownloadToggler(state, data) {
       state.pdf = data.payload 
+    },
+
+    setData(state, {payload: {data}}){
+       state[data.name].details = data.details
+       state.counter = state.counter + 1
     }
+
+
 
   },
 
 
 
 });
+
+function reduceArray (state) {
+  const propNames = [
+    "professionalSummary"
+  ];
+  propNames.forEach((name) => {
+    state[name].details = [state[name].details.reduce((acc, data) => {
+      acc += data
+      return acc
+    }, "")]
+  })
+}
 
 export const {
   addWorkHistory,
@@ -289,7 +319,9 @@ export const {
   updateLanguageSkill,
   changeTemplateType,
   changePreviewMode,
-  changePdfDownloadToggler
+  changePdfDownloadToggler,
+  changeCounter,
+  setData
 } = formsSlice.actions;
 export default formsSlice.reducer;
 

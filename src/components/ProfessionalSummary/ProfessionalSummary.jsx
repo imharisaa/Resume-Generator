@@ -9,7 +9,11 @@ const ProfessionalSummary = () => {
 
     const professionalSummaryData = useSelector(state => state.forms.professionalSummary)
     const dispatch = useDispatch()
-    // const [ deatil, setDetail ] = useState('')
+    const data = professionalSummaryData.details.reduce((acc, data) => {
+      acc += data
+      return acc
+    }, "")
+    const [ deatils, setDetail ] = useState(data)
 
     return (
     <>
@@ -22,10 +26,9 @@ const ProfessionalSummary = () => {
               Mention your role, experience & most importantly - your biggest
               achievements, best qualities and skills.
             </Text>
-            <ReactQuill theme="snow" defaultValue={professionalSummaryData.details} value={professionalSummaryData.details} onChange={(e) => {
-              // setDetail(e)
-              const details = e
-              dispatch(updateProfessionalSummary(details))
+            <ReactQuill theme="snow" defaultValue={deatils} value={deatils} onChange={(e) => {
+              setDetail(e)
+              dispatch(updateProfessionalSummary([deatils]))
             }} style={{height: '15rem', paddingTop: 12}} />
           </Flex>
         </Grid>
