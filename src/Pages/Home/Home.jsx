@@ -5,6 +5,7 @@ import {
   Button,
   Flex,
   Image,
+  List,
   Text,
   Title,
 } from "@mantine/core";
@@ -77,62 +78,9 @@ const Home = () => {
         <FirstQuationComponent />
         <SecondQuationComponent />
         <FamousTemplateComponent />
-
-        <Box w={"100%"} h={"fit-content"}>
-          <Flex w={"100%"} h={"60rem"}>
-            <Flex
-              style={{
-                flex: "0 0 50%",
-              }}
-              justify={"flex-end"}
-              align={"center"}
-            >
-              <Image width={"65%"} src={firstTemplate} />
-            </Flex>
-            <Flex
-              direction={"column"}
-              align={"flex-start"}
-              justify={"center"}
-              style={{
-                flex: "0 0 50%",
-              }}
-            >
-              <Box w={"100%"} h={"100%"}>
-                <Flex
-                  direction={"column"}
-                  w={"100%"}
-                  h={"100%"}
-                  justify={"center"}
-                  align={"center"}
-                >
-                  <Title>Cascade template</Title>
-
-                  <Title
-                    w={"50%"}
-                    style={{
-                      wordBreak: "break-all",
-                    }}
-                    align="center"
-                    order={5}
-                  >
-                    Cascade uses a dots for your skills and language sections
-                    and a sidebar with subtle shading differences.
-                  </Title>
-                  <Text align="center" w={'60%'}>
-                    You can add, remove, and rearrange the sections and further
-                    customize your resume, picking from dozens of color
-                    combinations...
-                  </Text>
-                  <Box style={{
-                    border: '1px solid red'
-                  }} >
-
-                  </Box>
-                </Flex>
-              </Box>
-            </Flex>
-          </Flex>
-        </Box>
+        <CascadeTemplateUsers />
+        <CanadianTemplateUsers />
+        <FAQComponent />
       </Flex>
     </>
   );
@@ -199,10 +147,16 @@ const QutationComponent = () => {
 
 const FirstQuationComponent = () => {
   return (
-    <Box w={"100%"} h={"fit-content"}>
+    <Box
+      style={{
+        borderBottom: "1px solid lightgray",
+      }}
+      w={"100%"}
+      h={"fit-content"}
+    >
       <Flex direction={"column"} w={"100%"} h={"35rem"}>
         <Title w={"100%"} h={"10%"}>
-          Why is Zety the best website to build your resume online?
+          Why is Permresume the best website to build your resume online?
         </Title>
         <Box w={"100%"} h={"90%"}>
           <Flex w={"100%"} h={"100%"}>
@@ -240,7 +194,7 @@ const FirstQuationComponent = () => {
                 flex: "0 0 50%",
               }}
             >
-              <Image width={"95%"} src={templateImgaeBlur} />
+              <Image width={"95%"} alt="Resume Templates Customizer" src={templateImgaeBlur} />
             </Flex>
           </Flex>
         </Box>
@@ -266,6 +220,7 @@ const SecondQuationComponent = () => {
                 style={{
                   filter: "blur(1px)",
                 }}
+                alt="Permresume Template Editor"
                 width={"95%"}
                 src={templateEditor}
               />
@@ -388,3 +343,209 @@ const FamousTemplateComponent = () => {
     </Box>
   );
 };
+
+const CascadeTemplateUsers = () => {
+  return (
+    <Box w={"100%"} h={"fit-content"}>
+      <Flex w={"100%"} h={"60rem"}>
+        <Flex
+          style={{
+            flex: "0 0 50%",
+          }}
+          justify={"flex-end"}
+          align={"center"}
+        >
+          <Image width={"65%"} alt="Permresume First Template Image which is avaiable in both template and normal template section" src={firstTemplate} />
+        </Flex>
+        <Flex
+          direction={"column"}
+          align={"flex-start"}
+          justify={"center"}
+          style={{
+            flex: "0 0 50%",
+          }}
+        >
+          <Flex justify={"center"} align={"center"} w={"100%"} h={"100%"}>
+            <Flex
+              direction={"column"}
+              w={"100%"}
+              h={"50%"}
+              justify={"space-evenly"}
+              align={"center"}
+            >
+              <Title color="darkblue">Cascade template</Title>
+
+              <Title
+                w={"50%"}
+                style={{
+                  wordBreak: "break-word",
+                }}
+                align="center"
+                order={5}
+              >
+                Cascade uses a dots for your skills and language sections and a
+                sidebar with subtle shading differences.
+              </Title>
+              <Text align="center" w={"60%"}>
+                You can add, remove and further customize your resume, picking
+                from dozens of color combinations...
+              </Text>
+              <Box
+                w={"5rem"}
+                style={{
+                  border: "1.5px solid darkblue",
+                }}
+              ></Box>
+
+              <Text>Template chosen by</Text>
+              <Title>Users</Title>
+            </Flex>
+          </Flex>
+        </Flex>
+      </Flex>
+    </Box>
+  );
+};
+
+const CanadianTemplateUsers = () => {
+  return (
+    <Box bg={"#081c4f14"} w={"100%"} h={"fit-content"}>
+      <Flex w={"100%"} h={"60rem"}>
+        <Flex
+          style={{
+            flex: "0 0 50%",
+          }}
+          justify={"flex-end"}
+          align={"center"}
+        >
+          <Image width={"65%"} alt="Permresume Canadian Template which is available in canadian template section" src={canadianTemplate} />
+        </Flex>
+        <Flex
+          direction={"column"}
+          align={"flex-start"}
+          justify={"center"}
+          style={{
+            flex: "0 0 50%",
+          }}
+        >
+          <Flex justify={"center"} align={"center"} w={"100%"} h={"100%"}>
+            <Flex
+              direction={"column"}
+              w={"100%"}
+              h={"50%"}
+              justify={"space-evenly"}
+              align={"center"}
+            >
+              <Title color="gray">Canadian Template</Title>
+
+              <Title
+                w={"70%"}
+                style={{
+                  wordBreak: "break-word",
+                }}
+                align="center"
+                order={5}
+              >
+                Crafting an effective Canadian job application template involves
+                attention to detail, customization, and a clear presentation of
+                your qualifications.
+              </Title>
+              <Text align="center" w={"60%"}>
+                You can add, remove and further customize your resume, picking
+                from dozens of color combinations...
+              </Text>
+              <Box
+                w={"5rem"}
+                style={{
+                  border: "1.5px solid gray",
+                }}
+              ></Box>
+
+              <Text>Template chosen by</Text>
+              <Title>Users</Title>
+            </Flex>
+          </Flex>
+        </Flex>
+      </Flex>
+    </Box>
+  );
+};
+
+const FAQComponent = () => {
+  return (
+    <Box w={"100%"} h={"fit-content"}>
+      <Flex direction={"column"} align={"center"} w={"100%"} h={"50rem"}>
+        <Title w={"40%"}>
+          Frequently Asked Questions about Permresume Website and Builder
+        </Title>
+        <Flex
+          p={12}
+          w={"40%"}
+          align={"flex-start"}
+          direction={"column"}
+          justify={"space-evenly"}
+          h={"15rem"}
+        >
+          <Title order={4}>
+            Why is Permresume the best website to prepare a job application?
+          </Title>
+          <Flex
+            w={"100%"}
+            direction={"column"}
+            justify={"space-evenly"}
+            h={"10rem"}
+          >
+            <Text>
+              <strong>
+                Permresume is the best website to build a professional resume
+                and generate a convincing cover letter quickly and easily.
+              </strong>{" "}
+              By using Permresume, you can benefit from all these advantages:
+            </Text>
+            <List>
+              <List.Item>
+                <strong>Feature-rich</strong>{" "}
+                <strong
+                  style={{
+                    color: "orange",
+                  }}
+                >
+                  Resume Builder
+                </strong>{" "}
+                with{" "}
+                <strong style={{ color: "orange" }}>
+                  professional resume templates
+                </strong>{" "}
+                for any job.
+              </List.Item>
+              <List.Item>
+                <strong style={{ color: "orange" }}>CV maker</strong> with{" "}
+                <strong
+                  style={{
+                    color: "orange",
+                  }}
+                >
+                  professional CV templates
+                </strong>{" "}
+                for academic applications.
+              </List.Item>
+              <List.Item>
+                A resume upload feature to{" "}
+                <strong style={{ color: "orange" }}>
+                  update your old resume
+                </strong>{" "}
+                instead of starting from scratch.
+              </List.Item>
+            </List>
+          </Flex>
+        </Flex>
+      </Flex>
+    </Box>
+  );
+};
+
+
+/* 
+&-K4B2]Qs7f] 
+permamot_blog
+*/

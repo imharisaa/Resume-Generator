@@ -9,7 +9,7 @@ import { changeTemplateType } from "../../store/forms.reducer";
 import { Helmet } from "react-helmet-async";
 
 const Resume = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const dispatch = useDispatch();
   const {
     classes: {

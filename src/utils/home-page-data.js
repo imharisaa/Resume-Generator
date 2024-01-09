@@ -160,4 +160,10 @@ export const qaData = [
       title: "Hundreds of Free Samples",
       descp: `Discover a comprehensive collection of prime resume and cover letter examples tailored for various jobs and industries, ensuring you land a job swiftly.`,
     },
-  ]
+];
+
+export const faqData = [
+  {
+    
+  }
+]
