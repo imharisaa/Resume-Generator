@@ -1,17 +1,16 @@
 import { MantineProvider } from "@mantine/core";
 import "./App.css";
 
-import { Route, Routes } from "react-router-dom";
-import Home from "./Pages/Home/Home";
-import StripeContainer from "./Pages/Payment/StripeContainer";
-import Resume from "./Pages/Resume/Resume";
-import { colorPlates } from "./Theming/CustomColorPlates/Plates";
-import Payment from "./Pages/Payment/Payment";
-import Success from "./Pages/Success/Success";
-import Cancel from "./Pages/Cancel/Cancel";
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
 import { Helmet } from "react-helmet-async";
+import { Route, Routes } from "react-router-dom";
+import Cancel from "./Pages/Cancel/Cancel";
+import Home from "./Pages/Home/Home";
+import Payment from "./Pages/Payment/Payment";
+import Resume from "./Pages/Resume/Resume";
+import Success from "./Pages/Success/Success";
+import { colorPlates } from "./Theming/CustomColorPlates/Plates";
 
 ReactGA.initialize('G-J11X1KZSV8');
 
@@ -35,8 +34,8 @@ function App() {
         }}
       >
         <Routes>
-          <Route exact path="/payment" element={<Payment />} />
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/payment" element={<Payment />} />
           <Route exact path="/resume" element={<Resume />} />
           <Route exact path="/success" element={<Success />} />
           <Route exact path="/cancel" element={<Cancel />} />
