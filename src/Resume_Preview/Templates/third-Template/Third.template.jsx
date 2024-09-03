@@ -244,13 +244,13 @@ const ThirdTemplate = () => {
 
 export default ThirdTemplate;
 
-export function ProfessionalSummary({ padding }) {
+export function ProfessionalSummary({ padding, color }) {
   const thirdTemplateData = useSelector((state) => state.forms);
   return (
     <Box w={"100%"} p={padding ? padding : "24px"}>
       <div
         style={{
-          color: "lightslategray",
+          color: `${ color ? color : "lightslategray"}`,
         }}
         dangerouslySetInnerHTML={{
           __html: `${thirdTemplateData.professionalSummary.details}`,
@@ -260,7 +260,7 @@ export function ProfessionalSummary({ padding }) {
   );
 }
 
-export function WorkHistory({ className, childPadding, parentPadding }) {
+export function WorkHistory({ className, childPadding, parentPadding, title }) {
   const thirdTemplateData = useSelector((state) => state.forms);
   const {
     classes: { Work_History_Component__heading_container },
@@ -274,7 +274,7 @@ export function WorkHistory({ className, childPadding, parentPadding }) {
           className ? className : Work_History_Component__heading_container
         }
       >
-        <Heading3>Work History</Heading3>
+        <Heading3>{title ? title : "Work History" }</Heading3>
       </Box>
       {thirdTemplateData.employmentHistory.map((item, key) => {
         return (

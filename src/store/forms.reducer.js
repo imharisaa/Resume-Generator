@@ -5,6 +5,7 @@ import ThirdTemplate from "../Resume_Preview/Templates/third-Template/Third.temp
 import ForthTemplate from "../Resume_Preview/Templates/forth-Template/Forth.template";
 import CanadianFirstTemplate from "../Resume_Preview/Templates/Canadian.First.Template/Canadian.First.Template";
 import FifthTemplate from "../Resume_Preview/Templates/Fifth.Template/Fifth.Template";
+import SixthTemplate from "../Resume_Preview/Templates/Sixth.Template/Sixth.Template";
 
 export const templateMaper = {
   "FristTemplate": FristTemplate,
@@ -12,7 +13,8 @@ export const templateMaper = {
   "ThirdTemplate": ThirdTemplate,
   "ForthTemplate": ForthTemplate,
   "FifthTemplate": FifthTemplate,
-  "CanadianFirstTemplate": CanadianFirstTemplate
+  "CanadianFirstTemplate": CanadianFirstTemplate,
+  "SixthTemplate": SixthTemplate,
 }
 
 export const templates = [
@@ -20,7 +22,8 @@ export const templates = [
   "SecondTemplate",
   "ThirdTemplate",
   "ForthTemplate",
-  "FifthTemplate"
+  "FifthTemplate",
+  "SixthTemplate",
 ];
 
 export const canadianTemplates = [
@@ -33,7 +36,8 @@ export const bothTemplate = [
   "ThirdTemplate",
   "ForthTemplate",
   "CanadianFirstTemplate",
-  "FifthTemplate"
+  "FifthTemplate",
+  "SixthTemplate",
 ];
 
 
